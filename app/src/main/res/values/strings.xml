@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Seroja Match Maker</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="signuphere">Create a new Account? Sign Up Here</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="fullname">Fullname</string>
+    <string name="loginhere">Already have account? Login</string>
 </resources>
