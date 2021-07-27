@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bottom_landing"
+    tools:context=".MainActivity"
+    android:id="@+id/mainActivity">
+
+    <RelativeLayout
+        android:layout_width="500dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="280dp"
+        android:layout_marginBottom="210dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="WELCOME!"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="25dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="70dp"
+            android:textAlignment="center"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:text="welcome to Seroja Soccer Cup Scheduling, you can make scheduling for your soccer without any paper by now!"
+            android:textSize="15dp"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="sans-serif-medium"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/buttonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp">
+
+        <LinearLayout
+            android:id="@+id/btnStart"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="110dp"
+            android:layout_marginLeft="135dp"
+            android:background="@drawable/cut_card_background"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:text="Start"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="20dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/ic_baseline_arrow_forward_ios_24">
+
+            </ImageView>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
