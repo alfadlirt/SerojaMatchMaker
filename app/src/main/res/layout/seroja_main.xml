@@ -25,8 +25,8 @@
                 android:id="@+id/nameUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Firda Riska Pratiwi"
                 android:textStyle="bold"
+                android:text="name here"
                 android:fontFamily="sans-serif"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="30dp"/>
@@ -35,7 +35,7 @@
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="firdaar"
+                android:text="username here"
                 android:fontFamily="sans-serif"
                 android:layout_marginTop="55dp"
                 android:layout_marginLeft="30dp"/>

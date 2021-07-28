@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private APIService mAPIService;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),SignUp.class);
+
                 startActivity(intent);
                 finish();
             }
@@ -75,6 +77,8 @@ public class LoginActivity extends AppCompatActivity {
                         String msg = "Welcome " + response.body().getData().getName() + " !";
                         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                        intent.putExtra("Name", response.body().getData().getName());
+                        intent.putExtra("Username", response.body().getData().getUsername());
                         startActivity(intent);
                         finish();
                     }
