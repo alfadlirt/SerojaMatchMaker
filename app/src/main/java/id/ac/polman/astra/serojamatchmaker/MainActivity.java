@@ -29,14 +29,14 @@ public class MainActivity extends AppCompatActivity implements Dashboard.Callbac
             }
         });
 
-//        FragmentManager fm = getSupportFragmentManager();
-//        Fragment fragment = fm.findFragmentById(R.id.mainActivity);
-//
-//        if(fragment == null){
-//            fragment = Dashboard.newInstance();
-//            fm.beginTransaction()
-//                    .add(R.id.mainActivity, fragment)
-//                    .commit();
+    }
+
+    public void callFragment2() {
+        BlankFragment fragment2 = new BlankFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mainActivity, fragment2)
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override
@@ -47,4 +47,5 @@ public class MainActivity extends AppCompatActivity implements Dashboard.Callbac
                 .addToBackStack(null)
                 .commit();
     }
+
 }

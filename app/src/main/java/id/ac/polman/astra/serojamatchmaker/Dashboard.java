@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,6 +35,14 @@ public class Dashboard extends Fragment{
         String sname = intent.getStringExtra("Name");
 
         setUsernameAndPassword(view, uname, sname);
+
+        LinearLayout start = (LinearLayout) view.findViewById(R.id.homebtn);
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).callFragment2();
+            }
+        });
 
         return view;
     }

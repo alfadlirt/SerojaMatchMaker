@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/W . I . M/Music/SerojaMatchMaker-app/app/src/main/res/layout/fragment_blank.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/W . I . M/Music/SerojaMatchMaker-app/app/src/main/res/layout/fragment_item_list.xml" value="0.14221014492753623" />
+        <entry key="..\:/Users/W . I . M/Music/SerojaMatchMaker-app/app/src/main/res/layout/seroja_main.xml" value="0.33" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>
