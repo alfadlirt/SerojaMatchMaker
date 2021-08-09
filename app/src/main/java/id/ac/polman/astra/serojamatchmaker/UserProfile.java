@@ -108,10 +108,10 @@ public class UserProfile extends Fragment {
                         ((MainActivity) getActivity()).onStartDashboard();
                         return true;
                     case R.id.event:
-                        ((MainActivity) getActivity()).callFragmentProfil();
+                        ((MainActivity) getActivity()).callFragmentAddEvent();
                         return true;
                     case R.id.logout:
-                        startActivity(new Intent(getActivity(), LoginActivity.class));
+                        startActivity(new Intent(getActivity(), StartActivity.class));
                         return true;
                 }
                 return false;

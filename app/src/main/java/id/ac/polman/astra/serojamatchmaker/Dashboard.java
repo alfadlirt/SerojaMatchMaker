@@ -83,6 +83,14 @@ public class Dashboard extends Fragment{
             }
         });
 
+        LinearLayout getEvent = (LinearLayout) view.findViewById(R.id.eventbtn);
+        getEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).callFragmentAddEvent();
+            }
+        });
+
         SharedPreferences preferences = this.getActivity().getSharedPreferences(APP_NAME, Context.MODE_PRIVATE);
         LinearLayout logout = (LinearLayout) view.findViewById(R.id.logoutbtn);
         logout.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +99,7 @@ public class Dashboard extends Fragment{
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.clear();
                 editor.apply();
-                startActivity(new Intent(getActivity(), LoginActivity.class));
+                startActivity(new Intent(getActivity(), StartActivity.class));
             }
         });
 
