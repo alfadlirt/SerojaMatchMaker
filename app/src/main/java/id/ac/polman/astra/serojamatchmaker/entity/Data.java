@@ -12,9 +12,21 @@ public class Data {
     @SerializedName("username")
     @Expose
     private String username;
-    @SerializedName("logged_in")
+    @SerializedName("change_pass")
     @Expose
-    private Boolean loggedIn;
+    private Boolean changePass;
+
+    @SerializedName("password")
+    @Expose
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getId() {
         return id;
@@ -40,11 +52,11 @@ public class Data {
         this.username = username;
     }
 
-    public Boolean getLoggedIn() {
-        return loggedIn;
+    public Boolean getChangePass() {
+        return changePass;
     }
 
-    public void setLoggedIn(Boolean loggedIn) {
-        this.loggedIn = loggedIn;
+    public void setChangePass(Boolean changePass) {
+        this.changePass = changePass;
     }
 }

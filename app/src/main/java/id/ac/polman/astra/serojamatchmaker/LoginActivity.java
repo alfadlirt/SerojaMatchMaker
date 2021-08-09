@@ -3,6 +3,7 @@ package id.ac.polman.astra.serojamatchmaker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,13 @@ import static android.content.ContentValues.TAG;
 
 public class LoginActivity extends AppCompatActivity {
     TextInputEditText textInputEditTextUsername,textInputEditTextPassword;
+    SharedPreferences sharedPreferences;
+    private final static String APP_NAME = "serojamatchmaker";
+    private final static String UNAME = "username";
+    private final static String NAMA = "name";
+    private final static String ID = "id";
+    private final static String PASSWORD = "password";
+
     Button btnLogin;
     ProgressBar progressBar;
     TextView textViewSignup;
@@ -36,6 +44,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.seroja_login);
+
+        sharedPreferences = getSharedPreferences(APP_NAME, MODE_PRIVATE);
 
         textInputEditTextUsername = findViewById(R.id.txtUsername);
         textInputEditTextPassword = findViewById(R.id.txtPassword);
@@ -74,13 +84,19 @@ public class LoginActivity extends AppCompatActivity {
                 Log.i(TAG, response.toString());
                 if(response.isSuccessful()) {
                     if(response.body().getSuccess()==true){
+                        SharedPreferences.Editor edit = sharedPreferences.edit();
+                        edit.putString(UNAME, response.body().getData().getUsername());
+                        edit.putString(NAMA, response.body().getData().getName());
+                        edit.putString(ID, response.body().getData().getId());
+                        edit.putString(PASSWORD, response.body().getData().getPassword());
+                        edit.apply();
                         String msg = "Welcome " + response.body().getData().getName() + " !";
                         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                        intent.putExtra("Name", response.body().getData().getName());
-                        intent.putExtra("Username", response.body().getData().getUsername());
+                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                /*        intent.putExtra("Name", response.body().getData().getName());
+                        intent.putExtra("Username", response.body().getData().getUsername());*/
                         startActivity(intent);
-                        finish();
+                       // finish();
                     }
                     else{
                         Toast.makeText(getApplicationContext(), "Username or Password Not Match", Toast.LENGTH_SHORT).show();
