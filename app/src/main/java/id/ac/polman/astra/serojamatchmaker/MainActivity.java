@@ -48,6 +48,23 @@ public class MainActivity extends AppCompatActivity implements Dashboard.Callbac
                 .commit();
     }
 
+    public void callFragmentEvent() {
+        EventFragment fragment2 = new EventFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mainActivity, fragment2)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void callFragmentTeam(Bundle bundle) {
+        TeamFragment fragment2 = new TeamFragment();
+        fragment2.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mainActivity, fragment2)
+                .addToBackStack(null)
+                .commit();
+    }
+
     @Override
     public void onStartDashboard() {
         Fragment fragment = Dashboard.newInstance();

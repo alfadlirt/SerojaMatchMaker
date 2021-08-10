@@ -3,9 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/W . I . M/Music/SerojaMatchMaker-app/app/src/main/res/layout/activity_add_event.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/W . I . M/Music/SerojaMatchMaker-app/app/src/main/res/layout/activity_main.xml" value="0.16621376811594202" />
+        <entry key="..\:/Users/W . I . M/Music/SerojaMatchMaker-app/app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
         <entry key="..\:/Users/W . I . M/Music/SerojaMatchMaker-app/app/src/main/res/layout/fragment_blank.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/W . I . M/Music/SerojaMatchMaker-app/app/src/main/res/layout/fragment_item_list.xml" value="0.14221014492753623" />
+        <entry key="..\:/Users/W . I . M/Music/SerojaMatchMaker-app/app/src/main/res/layout/layout_add_team.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/W . I . M/Music/SerojaMatchMaker-app/app/src/main/res/layout/list_team_input.xml" value="0.21331521739130435" />
         <entry key="..\:/Users/W . I . M/Music/SerojaMatchMaker-app/app/src/main/res/layout/seroja_main.xml" value="0.33" />
+        <entry key="..\:/Users/W . I . M/Music/SerojaMatchMaker-app/app/src/main/res/layout/team_input_card.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/W . I . M/Music/SerojaMatchMaker-app/app/src/main/res/layout/testing.xml" value="0.1703125" />
+        <entry key="..\:/Users/W . I . M/Music/SerojaMatchMaker-app/app/src/main/res/layout/user_activity.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/W . I . M/Music/SerojaMatchMaker-app/app/src/main/res/menu/menu_navigator.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/W . I . M/Music/SerojaMatchMaker-app/app/src/main/res/menu/menu_team_input.xml" value="0.22447916666666667" />
       </map>
     </option>
   </component>

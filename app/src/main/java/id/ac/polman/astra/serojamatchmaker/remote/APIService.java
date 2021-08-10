@@ -1,5 +1,7 @@
 package id.ac.polman.astra.serojamatchmaker.remote;
 
+import id.ac.polman.astra.serojamatchmaker.entity.EventInput;
+import id.ac.polman.astra.serojamatchmaker.entity.ResponseAddEvent;
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseChangePassword;
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseLogin;
 import id.ac.polman.astra.serojamatchmaker.entity.User;
@@ -15,7 +17,8 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface APIService {
+public interface
+APIService {
 
     @POST("user/auth")
     @FormUrlEncoded
@@ -25,6 +28,7 @@ public interface APIService {
 
     @POST("user")
     Call<User> addUser(@Body User user);
+
 
     @GET("user/")
     Call<User> getUser();
@@ -44,4 +48,7 @@ public interface APIService {
     Call<ResponseChangePassword> changePassword(@Path("id") String id,
                                                 @Field("oldpassword") String oldpassword,
                                                 @Field("newpassword") String newpassword);
+
+    @POST("event")
+    Call<ResponseAddEvent> addEventAndTeam(@Body EventInput eventInput);
 }
