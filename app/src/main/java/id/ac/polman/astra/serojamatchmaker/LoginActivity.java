@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private final static String ID = "id";
     private final static String PASSWORD = "password";
 
-    Button btnLogin;
+    LinearLayout btnLogin;
     ProgressBar progressBar;
     TextView textViewSignup;
     private APIService mAPIService;

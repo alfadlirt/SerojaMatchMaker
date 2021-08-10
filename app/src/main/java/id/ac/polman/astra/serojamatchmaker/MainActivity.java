@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.EventLog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,6 +85,14 @@ public class MainActivity extends AppCompatActivity implements Dashboard.Callbac
 
     public void callFragmentChangePassword(){
         Fragment fragment = UserPassword.newInstance();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mainActivity, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void callFragmentAddEvent(){
+        Fragment fragment = EventActivity.newInstance();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.mainActivity, fragment)
                 .addToBackStack(null)

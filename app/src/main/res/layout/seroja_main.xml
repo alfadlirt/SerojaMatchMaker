@@ -206,5 +206,18 @@
 
     </GridLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/eventList"
+        android:scrollbars="none"
+        android:layout_marginTop="550dp"
+        android:clipToPadding="false"
+        android:layout_width="300dp"
+        android:layout_height="125dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="50dp"
+
+        tools:listitem="@layout/event_list"/>
+
 
 </RelativeLayout>
