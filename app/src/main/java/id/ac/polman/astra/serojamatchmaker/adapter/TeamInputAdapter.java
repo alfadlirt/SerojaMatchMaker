@@ -63,7 +63,7 @@ public class TeamInputAdapter extends RecyclerView.Adapter<TeamInputAdapter.Team
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                    editModelArrayList.get(getAdapterPosition()).setInstance_name(instance_nameTxt.getText().toString());
+                    editModelArrayList.get(getAdapterPosition()).setInstance(instance_nameTxt.getText().toString());
                 }
 
                 @Override
@@ -95,7 +95,7 @@ public class TeamInputAdapter extends RecyclerView.Adapter<TeamInputAdapter.Team
         holder.mTextView2.setText(currentItem.getText2());
         */
         holder.team_nameTxt.setText(editModelArrayList.get(position).getTeam_name());
-        holder.instance_nameTxt.setText(editModelArrayList.get(position).getInstance_name());
+        holder.instance_nameTxt.setText(editModelArrayList.get(position).getInstance());
 
     }
     @Override

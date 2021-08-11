@@ -22,6 +22,7 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import id.ac.polman.astra.serojamatchmaker.adapter.TeamInputAdapter;
 import id.ac.polman.astra.serojamatchmaker.entity.EventInput;
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseAddEvent;
@@ -29,6 +30,7 @@ import id.ac.polman.astra.serojamatchmaker.model.Event;
 import id.ac.polman.astra.serojamatchmaker.model.TeamCardInput;
 import id.ac.polman.astra.serojamatchmaker.remote.APIService;
 import id.ac.polman.astra.serojamatchmaker.utils.APIUtils;
+import id.ac.polman.astra.serojamatchmaker.utils.CustomLoading;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,7 +47,7 @@ public class TeamFragment extends Fragment {
     private EditText mNumberOfTeam;
     private int numberOfLines = 0;
     Event event;
-
+    CustomLoading loadingDialog;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -84,6 +86,7 @@ public class TeamFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadingDialog = new CustomLoading(getActivity());
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -111,40 +114,65 @@ public class TeamFragment extends Fragment {
         view.findViewById(R.id.btnSaveTeam).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<TeamCardInput> team_list_array = new ArrayList<>();
-                for (int i = 0; i < TeamInputAdapter.editModelArrayList.size(); i++){
-                    TeamCardInput teaminput = new TeamCardInput();
-                    teaminput.setTeam_name(TeamInputAdapter.editModelArrayList.get(i).getTeam_name());
-                    teaminput.setInstance_name(TeamInputAdapter.editModelArrayList.get(i).getInstance_name());
-                    team_list_array.add(teaminput);
-                }
+                new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText("Are you sure the data is valid?")
+                        .setContentText("You won't be able to change team after event created!")
+                        .setConfirmText("Save")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                sDialog.dismissWithAnimation();
+                                loadingDialog.startLoading("Creating Your Event..");
+                                List<TeamCardInput> team_list_array = new ArrayList<>();
+                                for (int i = 0; i < TeamInputAdapter.editModelArrayList.size(); i++){
+                                    TeamCardInput teaminput = new TeamCardInput();
+                                    teaminput.setTeam_name(TeamInputAdapter.editModelArrayList.get(i).getTeam_name());
+                                    teaminput.setInstance(TeamInputAdapter.editModelArrayList.get(i).getInstance());
+                                    team_list_array.add(teaminput);
+                                }
 
-                ObjectMapper objectMapper = new ObjectMapper();
-                String team_list_json = "";
-                try {
-                    team_list_json = objectMapper.writeValueAsString(team_list_array);
-                } catch (JsonProcessingException e) {
-                    e.printStackTrace();
-                }
-                mAPIService = APIUtils.getAPIService();
-                Call<ResponseAddEvent> call = mAPIService.addEventAndTeam(
-                        new EventInput("ASD",event.getEvent_name(),event.getNumber_of_team(),event.getElimination_type(),team_list_json));
-                call.enqueue(new Callback<ResponseAddEvent>() {
-                    @Override
-                    public void onResponse(Call<ResponseAddEvent> call, Response<ResponseAddEvent> response) {
-                        if(response.body() != null){
-                            ((MainActivity) getActivity()).onStartDashboard();
-                            Toast.makeText(getActivity(), "Data saved successfully", Toast.LENGTH_LONG).show();
+                                ObjectMapper objectMapper = new ObjectMapper();
+                                String team_list_json = "";
+                                try {
+                                    team_list_json = objectMapper.writeValueAsString(team_list_array);
+                                } catch (JsonProcessingException e) {
+                                    e.printStackTrace();
+                                }
+                                mAPIService = APIUtils.getAPIService();
+                                Call<ResponseAddEvent> call = mAPIService.addEventAndTeam(
+                                        new EventInput("ASD",event.getEvent_name(),event.getNumber_of_team(),event.getElimination_type(),team_list_json));
 
-                        }
-                    }
+                                call.enqueue(new Callback<ResponseAddEvent>() {
+                                    @Override
+                                    public void onResponse(Call<ResponseAddEvent> call, Response<ResponseAddEvent> response) {
+                                        if(response.isSuccessful()){
+                                            loadingDialog.stopLoading();
+                                            if(response.body().getSuccess()==true) {
+                                                Bundle bundle = new Bundle();
+                                                bundle.putParcelable("eventData", response.body().getData());
+                                                ((MainActivity) getActivity()).callFragmentEventCreated(bundle);
+                                                Toast.makeText(getActivity(), "Data saved successfully", Toast.LENGTH_LONG).show();
+                                            }else{
 
-                    @Override
-                    public void onFailure(Call<ResponseAddEvent> call, Throwable t) {
-                        Log.e("Update Error : ", t.getMessage());
-                        Toast.makeText(getActivity(), "Data gagal tersimpan!", Toast.LENGTH_LONG).show();
-                    }
-                });
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ResponseAddEvent> call, Throwable t) {
+                                        Log.e("Update Error : ", t.getMessage());
+                                        Toast.makeText(getActivity(), "Data gagal tersimpan!", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                        })
+                        .setCancelButton("Cancel", new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                sDialog.dismissWithAnimation();
+                            }
+                        })
+                        .show();
             }
         });
         return view;
@@ -161,25 +189,6 @@ public class TeamFragment extends Fragment {
 
         return list;
     }
-    
-    private void createEvent(){
-        String eventName = String.valueOf(mEventName.getText());
-        String numberOfTeam = String.valueOf(mNumberOfTeam.getText());
 
-        if (eventName.isEmpty()) {
-            mEventName.setError("Harap isi Field Name!");
-            mEventName.requestFocus();
-            return;
-        } else if (numberOfTeam.isEmpty()) {
-            mNumberOfTeam.setError("Harap isi Field Username!");
-            mNumberOfTeam.requestFocus();
-            return;
-        }else{
-            Event event = new
-                    Event(eventName, Integer.parseInt(numberOfTeam),"KNO","ONGOING", 0);
-
-           
-        }
-    }
 
 }

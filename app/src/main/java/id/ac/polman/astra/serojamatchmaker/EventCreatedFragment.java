@@ -1,40 +1,49 @@
 package id.ac.polman.astra.serojamatchmaker;
 
-import static android.content.ContentValues.TAG;
-
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import id.ac.polman.astra.serojamatchmaker.entity.ResponseLogin;
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import id.ac.polman.astra.serojamatchmaker.adapter.TeamInputAdapter;
+import id.ac.polman.astra.serojamatchmaker.entity.AddEventReturnData;
+import id.ac.polman.astra.serojamatchmaker.entity.EventInput;
+import id.ac.polman.astra.serojamatchmaker.entity.ResponseAddEvent;
 import id.ac.polman.astra.serojamatchmaker.model.Event;
+import id.ac.polman.astra.serojamatchmaker.model.TeamCardInput;
 import id.ac.polman.astra.serojamatchmaker.remote.APIService;
 import id.ac.polman.astra.serojamatchmaker.utils.APIUtils;
+import id.ac.polman.astra.serojamatchmaker.utils.CustomLoading;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link EventFragment#newInstance} factory method to
+ * Use the {@link EventCreatedFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EventFragment extends Fragment {
-
-    private APIService mAPIService;
-    private EditText mEventName;
-    private EditText mNumberOfTeam;
+public class EventCreatedFragment extends Fragment {
+    AddEventReturnData eventData;
+    CustomLoading loadingDialog;
+    TextView mEventID;
+    TextView mEventName;
+    TextView mEventTeam;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,7 +54,7 @@ public class EventFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public EventFragment() {
+    public EventCreatedFragment() {
         // Required empty public constructor
     }
 
@@ -58,8 +67,8 @@ public class EventFragment extends Fragment {
      * @return A new instance of fragment BlankFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EventFragment newInstance(String param1, String param2) {
-        EventFragment fragment = new EventFragment();
+    public static EventCreatedFragment newInstance(String param1, String param2) {
+        EventCreatedFragment fragment = new EventCreatedFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -75,56 +84,34 @@ public class EventFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            this.eventData = bundle.getParcelable("eventData");
+        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_add_event, container, false);
+        View view = inflater.inflate(R.layout.event_created, container, false);
         // Inflate the layout for this fragment
-        mEventName = (EditText) view.findViewById(R.id.txtEventName);
-        mNumberOfTeam = (EditText) view.findViewById(R.id.txtNumberTeam);
-        view.findViewById(R.id.btnSaveEvent2).setOnClickListener(new View.OnClickListener() {
+        mEventID = (TextView) view.findViewById(R.id.txt_EventID);
+        mEventName = (TextView) view.findViewById(R.id.txt_EventName);
+        mEventTeam = (TextView) view.findViewById(R.id.txt_NumberOfTeam);
+        mEventID.setText(eventData.getEvent().getId());
+        mEventName.setText(eventData.getEvent().getEventName());
+        mEventTeam.setText(eventData.getEvent().getNumberOfTeam());
+
+        view.findViewById(R.id.btnBack).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createEvent();
+                ((MainActivity) getActivity()).onStartDashboard();
             }
         });
-
-        view.findViewById(R.id.btnSaveText).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createEvent();
-            }
-        });
-
         return view;
     }
 
-    private void createEvent(){
-        String eventName = String.valueOf(mEventName.getText());
-        String numberOfTeam = String.valueOf(mNumberOfTeam.getText());
 
-        if (eventName.isEmpty()) {
-            mEventName.setError("Harap isi Field Name!");
-            mEventName.requestFocus();
-            return;
-        } else if (numberOfTeam.isEmpty()) {
-            mNumberOfTeam.setError("Harap isi Field Username!");
-            mNumberOfTeam.requestFocus();
-            return;
-        }else{
-            Event event = new
-                    Event(eventName, Integer.parseInt(numberOfTeam),"KNO","ONGOING", 0);
-
-            Bundle bundle = new Bundle();
-            bundle.putParcelable("event", event);
-
-
-
-            ((MainActivity) getActivity()).callFragmentTeam(bundle);
-
-        }
-    }
 
 }

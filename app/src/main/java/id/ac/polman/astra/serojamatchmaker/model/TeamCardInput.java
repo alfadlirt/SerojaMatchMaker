@@ -2,14 +2,14 @@ package id.ac.polman.astra.serojamatchmaker.model;
 
 public class TeamCardInput {
     private String team_name;
-    private String instance_name;
+    private String instance;
 
     public TeamCardInput() {
     }
 
-    public TeamCardInput(String team_name, String instance_name) {
+    public TeamCardInput(String team_name, String instance) {
         this.team_name = team_name;
-        this.instance_name = instance_name;
+        this.instance = instance;
     }
 
     public String getTeam_name() {
@@ -20,11 +20,11 @@ public class TeamCardInput {
         this.team_name = team_name;
     }
 
-    public String getInstance_name() {
-        return instance_name;
+    public String getInstance() {
+        return instance;
     }
 
-    public void setInstance_name(String instance_name) {
-        this.instance_name = instance_name;
+    public void setInstance(String instance) {
+        this.instance = instance;
     }
 }

@@ -19,6 +19,7 @@ import id.ac.polman.astra.serojamatchmaker.entity.ResponseLogin;
 import id.ac.polman.astra.serojamatchmaker.entity.User;
 import id.ac.polman.astra.serojamatchmaker.remote.APIService;
 import id.ac.polman.astra.serojamatchmaker.utils.APIUtils;
+import id.ac.polman.astra.serojamatchmaker.utils.CustomLoading;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private final static String NAMA = "name";
     private final static String ID = "id";
     private final static String PASSWORD = "password";
-
+    CustomLoading loadingDialog;
     LinearLayout btnLogin;
     ProgressBar progressBar;
     TextView textViewSignup;
@@ -45,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.seroja_login);
+        loadingDialog = new CustomLoading(LoginActivity.this);
 
         sharedPreferences = getSharedPreferences(APP_NAME, MODE_PRIVATE);
 
@@ -79,11 +81,14 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void authlogin(String username, String password) {
+        loadingDialog.startLoading("Logging In...");
         mAPIService.authlogin(username, password).enqueue(new Callback<ResponseLogin>() {
+
             @Override
             public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
                 Log.i(TAG, response.toString());
                 if(response.isSuccessful()) {
+                    loadingDialog.stopLoading();
                     if(response.body().getSuccess()==true){
                         SharedPreferences.Editor edit = sharedPreferences.edit();
                         edit.putString(UNAME, response.body().getData().getUsername());
