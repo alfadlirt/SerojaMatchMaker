@@ -1,5 +1,8 @@
 package id.ac.polman.astra.serojamatchmaker.remote;
 
+import java.util.List;
+
+import id.ac.polman.astra.serojamatchmaker.entity.EventInput;
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseChangePassword;
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseLogin;
 import id.ac.polman.astra.serojamatchmaker.entity.User;
@@ -44,4 +47,7 @@ public interface APIService {
     Call<ResponseChangePassword> changePassword(@Path("id") String id,
                                                 @Field("oldpassword") String oldpassword,
                                                 @Field("newpassword") String newpassword);
+
+    @GET("event")
+    Call<List<EventInput>> getEvent();
 }
