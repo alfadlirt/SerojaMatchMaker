@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements Dashboard.Callbac
                 onStartDashboard();
             }
         });
-
     }
 
     public void callFragment2() {

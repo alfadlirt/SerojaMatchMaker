@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
     LinearLayout btnLogin;
     ProgressBar progressBar;
-    TextView textViewSignup;
+    TextView textViewSignup, mTextViewMonitoring;
     private APIService mAPIService;
 
 
@@ -53,6 +53,17 @@ public class LoginActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progress);
         btnLogin = findViewById(R.id.btnLogin);
         textViewSignup = findViewById(R.id.textSignup);
+        mTextViewMonitoring = findViewById(R.id.txtMonitoring);
+
+        mTextViewMonitoring.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),monitoringActivity.class);
+
+                startActivity(intent);
+                finish();
+            }
+        });
 
         textViewSignup.setOnClickListener(new View.OnClickListener() {
             @Override

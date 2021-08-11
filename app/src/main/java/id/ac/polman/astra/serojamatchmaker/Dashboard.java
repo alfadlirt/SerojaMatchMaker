@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import java.util.ArrayList;
+import java.util.List;
 
 import id.ac.polman.astra.serojamatchmaker.entity.User;
 import id.ac.polman.astra.serojamatchmaker.remote.APIService;
@@ -65,7 +67,7 @@ public class Dashboard extends Fragment{
         String passsp = sharedPreferences.getString(PASSWORD, null);
 
 
-        setNameAndUname(view, unamesp, namesp);
+        setNameAndUname(view, namesp);
 
         LinearLayout start = (LinearLayout) view.findViewById(R.id.homebtn);
         start.setOnClickListener(new View.OnClickListener() {
@@ -106,12 +108,9 @@ public class Dashboard extends Fragment{
         return view;
     }
 
-    public void setNameAndUname(View view, String uname, String name){
+    public void setNameAndUname(View view, String name){
         TextView m_name = (TextView) view.findViewById(R.id.nameUser);
         m_name.setText(name);
-
-        TextView m_username = (TextView) view.findViewById(R.id.username);
-        m_username.setText(uname);
     }
 
     public interface Callbacks{

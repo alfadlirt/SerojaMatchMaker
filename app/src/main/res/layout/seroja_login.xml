@@ -16,7 +16,7 @@
         android:textSize="30dp"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        app:layout_constraintVertical_bias=".05"
+        app:layout_constraintVertical_bias=".035"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,8 +24,8 @@
 
     <ImageView
         android:id="@+id/serojaLoginPict"
-        android:layout_width="230dp"
-        android:layout_height="230dp"
+        android:layout_width="210dp"
+        android:layout_height="210dp"
         app:layout_constraintVertical_bias="0"
         android:layout_marginTop="20dp"
         android:scaleType="centerCrop"
@@ -94,7 +94,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="160dp"
+        android:layout_marginLeft="175dp"
         android:text="Login"
         android:textSize="15dp"
         android:fontFamily="sans-serif-medium"
@@ -129,16 +129,20 @@
         android:id="@+id/textSignup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:text="@string/signuphere"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
-
-
+    <TextView
+        android:id="@+id/txtMonitoring"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="monitoring"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textSignup" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
