@@ -83,6 +83,13 @@ public class Dashboard extends Fragment{
             }
         });
 
+        LinearLayout logoutButton = (LinearLayout) view.findViewById(R.id.logoutbtn);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).callDetailFragment();
+            }
+        });
 
         SharedPreferences preferences = this.getActivity().getSharedPreferences(APP_NAME, Context.MODE_PRIVATE);
         LinearLayout logout = (LinearLayout) view.findViewById(R.id.logoutbtn);

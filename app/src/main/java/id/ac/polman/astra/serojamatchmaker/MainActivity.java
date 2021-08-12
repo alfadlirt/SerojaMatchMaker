@@ -2,21 +2,13 @@ package id.ac.polman.astra.serojamatchmaker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
-import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.EventLog;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import id.ac.polman.astra.serojamatchmaker.fragment.BracketsFragment;
 import id.ac.polman.astra.serojamatchmaker.model.BracketCard;
 import id.ac.polman.astra.serojamatchmaker.utils.UpdateScoreModal;
 
@@ -73,6 +65,14 @@ public class MainActivity extends AppCompatActivity implements Dashboard.Callbac
     public void callFragmentEventCreated(Bundle bundle) {
         EventCreatedFragment fragment2 = new EventCreatedFragment();
         fragment2.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mainActivity, fragment2)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void callDetailFragment() {
+        BracketsFragment fragment2 = new BracketsFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.mainActivity, fragment2)
                 .addToBackStack(null)
