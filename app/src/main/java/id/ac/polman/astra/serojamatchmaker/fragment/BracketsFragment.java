@@ -1,4 +1,4 @@
-package com.ventura.emilp.tournamentbrackets.Fragment;
+package id.ac.polman.astra.serojamatchmaker.fragment;
 
 import android.os.Bundle;
 
@@ -10,16 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ventura.emilp.tournamentbrackets.R;
-import com.ventura.emilp.tournamentbrackets.adapter.BracketsSectionAdapter;
-import com.ventura.emilp.tournamentbrackets.customviews.WrapContentHeightViewPager;
-import com.ventura.emilp.tournamentbrackets.model.ColomnData;
-import com.ventura.emilp.tournamentbrackets.model.CompetitorData;
-import com.ventura.emilp.tournamentbrackets.model.MatchData;
-import com.ventura.emilp.tournamentbrackets.utility.BracketsUtility;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import id.ac.polman.astra.serojamatchmaker.R;
+import id.ac.polman.astra.serojamatchmaker.adapter.BracketsSectionAdapter;
+import id.ac.polman.astra.serojamatchmaker.customview.WrapContentHeightViewPager;
+import id.ac.polman.astra.serojamatchmaker.model.ColomnData;
+import id.ac.polman.astra.serojamatchmaker.model.CompetitorData;
+import id.ac.polman.astra.serojamatchmaker.model.MatchData;
+import id.ac.polman.astra.serojamatchmaker.utils.BracketsUtility;
 
 
 /**
@@ -51,9 +52,11 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
 
     private void setData() {
         sectionList = new ArrayList<>();
+        //-----------
         ArrayList<MatchData> Colomn1matchesList = new ArrayList<>();
         ArrayList<MatchData> colomn2MatchesList = new ArrayList<>();
         ArrayList<MatchData> colomn3MatchesList = new ArrayList<>();
+
         CompetitorData competitorOne = new CompetitorData("Manchester United Fc", "2");
         CompetitorData competitorTwo = new CompetitorData("Arsenal", "1");
         CompetitorData competitorThree = new CompetitorData("Chelsea", "2");
@@ -66,22 +69,32 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
         MatchData matchData2 = new MatchData(competitorThree, competitorFour);
         MatchData matchData3 = new MatchData(competitorFive,competitorSix);
         MatchData matchData4 = new MatchData(competitorSeven, competitorEight);
+
         Colomn1matchesList.add(matchData1);
         Colomn1matchesList.add(matchData2);
         Colomn1matchesList.add(matchData3);
         Colomn1matchesList.add(matchData4);
+
         ColomnData colomnData1 = new ColomnData(Colomn1matchesList);
         sectionList.add(colomnData1);
+
+        //---------------------
+
         CompetitorData competitorNine = new CompetitorData("Manchester United Fc", "2");
         CompetitorData competitorTen = new CompetitorData("Chelsea", "4");
         CompetitorData competitorEleven = new CompetitorData("Liverpool", "2");
         CompetitorData competitorTwelve = new CompetitorData("westham", "1");
+
         MatchData matchData5 = new MatchData(competitorNine,competitorTen);
         MatchData matchData6 = new MatchData(competitorEleven, competitorTwelve);
+
         colomn2MatchesList.add(matchData5);
         colomn2MatchesList.add(matchData6);
+
         ColomnData colomnData2 = new ColomnData(colomn2MatchesList);
         sectionList.add(colomnData2);
+
+        //-------------------
         CompetitorData competitorThirteen = new CompetitorData("Chelsea", "2");
         CompetitorData competitorForteen = new CompetitorData("Liverpool", "1");
         MatchData matchData7 = new MatchData(competitorThirteen, competitorForteen);

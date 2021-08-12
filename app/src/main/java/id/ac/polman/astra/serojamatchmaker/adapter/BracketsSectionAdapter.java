@@ -1,4 +1,4 @@
-package com.ventura.emilp.tournamentbrackets.adapter;
+package id.ac.polman.astra.serojamatchmaker.adapter;
 
 import android.os.Bundle;
 
@@ -6,10 +6,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.ventura.emilp.tournamentbrackets.Fragment.BracketsColomnFragment;
-import com.ventura.emilp.tournamentbrackets.model.ColomnData;
 
 import java.util.ArrayList;
+
+import id.ac.polman.astra.serojamatchmaker.fragment.BracketsColomnFragment;
+import id.ac.polman.astra.serojamatchmaker.model.ColomnData;
 
 /**
  * Created by Emil on 21/10/17.

@@ -1,4 +1,4 @@
-package com.ventura.emilp.tournamentbrackets.viewholder;
+package id.ac.polman.astra.serojamatchmaker.viewholder;
 
 import android.view.View;
 import android.view.animation.Animation;
@@ -8,8 +8,9 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ventura.emilp.tournamentbrackets.R;
 import com.ventura.emilp.tournamentbrackets.animation.SlideAnimation;
+
+import id.ac.polman.astra.serojamatchmaker.R;
 
 /**
  * Created by Emil on 21/10/17.

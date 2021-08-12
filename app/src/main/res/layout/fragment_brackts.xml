@@ -1,40 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#110f0f"
+    android:background="@drawable/bg_main"
     android:orientation="vertical">
-
     <ScrollView
-        android:id="@+id/scroll_view"
+        android:id="@+id/detail_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
         android:orientation="vertical"
-        android:scrollbars="none">
-
-        <RelativeLayout
+        android:scrollbars="vertical">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <com.ventura.emilp.tournamentbrackets.customviews.WrapContentHeightViewPager
-                android:id="@+id/container"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TextView
-                android:id="@+id/no_content_text"
-                android:layout_centerInParent="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <View
+                android:layout_height="wrap_content"
+                app:helperText="Event ID"
+                android:layout_margin="10dp">
+                <TextView
+                    android:id="@+id/txt_EventID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Event ID Here"
+                    android:textSize="20dp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/colorBlack"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"
+                app:helperText="Event Name"
+                android:layout_margin="10dp">
+                <TextView
+                    android:id="@+id/txt_EventName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Event Name Here"
+                    android:textSize="20dp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/colorBlack"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <ScrollView
+                android:id="@+id/scroll_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:orientation="vertical"
+                android:scrollbars="none">
 
-        </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <id.ac.polman.astra.serojamatchmaker.customview.WrapContentHeightViewPager
+                        android:id="@+id/container"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:id="@+id/no_content_text"
+                        android:layout_centerInParent="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                </RelativeLayout>
+
+            </ScrollView>
+        </LinearLayout>
 
     </ScrollView>
+
+
+
 
     <RelativeLayout
         android:id="@+id/gf_container"

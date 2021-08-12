@@ -1,8 +1,9 @@
-package com.ventura.emilp.tournamentbrackets.utility;
+package id.ac.polman.astra.serojamatchmaker.utils;
 
 import android.util.DisplayMetrics;
 
-import com.ventura.emilp.tournamentbrackets.application.BracketsApplication;
+import id.ac.polman.astra.serojamatchmaker.application.BracketsApplication;
+
 
 /**
  * Created by Emil on 21/10/17.

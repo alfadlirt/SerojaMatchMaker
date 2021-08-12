@@ -1,4 +1,4 @@
-package com.ventura.emilp.tournamentbrackets.model;
+package id.ac.polman.astra.serojamatchmaker.model;
 
 import java.io.Serializable;
 

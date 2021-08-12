@@ -1,4 +1,4 @@
-package com.ventura.emilp.tournamentbrackets.Fragment;
+package id.ac.polman.astra.serojamatchmaker.fragment;
 
 import android.os.Bundle;
 
@@ -12,13 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ventura.emilp.tournamentbrackets.R;
-import com.ventura.emilp.tournamentbrackets.adapter.BracketsCellAdapter;
-import com.ventura.emilp.tournamentbrackets.model.ColomnData;
-import com.ventura.emilp.tournamentbrackets.model.MatchData;
-import com.ventura.emilp.tournamentbrackets.utility.BracketsUtility;
 
 import java.util.ArrayList;
+
+import id.ac.polman.astra.serojamatchmaker.R;
+import id.ac.polman.astra.serojamatchmaker.adapter.BracketsCellAdapter;
+import id.ac.polman.astra.serojamatchmaker.model.ColomnData;
+import id.ac.polman.astra.serojamatchmaker.model.MatchData;
+import id.ac.polman.astra.serojamatchmaker.utils.BracketsUtility;
 
 /**
  * Created by Emil on 21/10/17.
@@ -32,7 +33,7 @@ public class BracketsColomnFragment extends Fragment {
     private ArrayList<MatchData> list;
     private RecyclerView bracketsRV;
 
-    private BracketsCellAdapter  adapter;
+    private BracketsCellAdapter adapter;
 
 
     @Nullable

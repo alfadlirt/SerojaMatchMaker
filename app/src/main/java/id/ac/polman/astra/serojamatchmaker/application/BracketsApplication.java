@@ -1,4 +1,4 @@
-package com.ventura.emilp.tournamentbrackets.application;
+package id.ac.polman.astra.serojamatchmaker.application;
 
 import android.app.Application;
 
@@ -14,8 +14,8 @@ public class BracketsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        applicationInstance = this;
-
+        //applicationInstance = this;
+            applicationInstance = BracketsApplication.this;
     }
 
     public static synchronized BracketsApplication getInstance() {

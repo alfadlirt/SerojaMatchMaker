@@ -1,4 +1,4 @@
-package com.ventura.emilp.tournamentbrackets.adapter;
+package id.ac.polman.astra.serojamatchmaker.adapter;
 
 import android.content.Context;
 import android.os.Handler;
@@ -8,12 +8,13 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ventura.emilp.tournamentbrackets.Fragment.BracketsColomnFragment;
-import com.ventura.emilp.tournamentbrackets.R;
-import com.ventura.emilp.tournamentbrackets.model.MatchData;
-import com.ventura.emilp.tournamentbrackets.viewholder.BracketsCellViewHolder;
 
 import java.util.ArrayList;
+
+import id.ac.polman.astra.serojamatchmaker.R;
+import id.ac.polman.astra.serojamatchmaker.fragment.BracketsColomnFragment;
+import id.ac.polman.astra.serojamatchmaker.model.MatchData;
+import id.ac.polman.astra.serojamatchmaker.viewholder.BracketsCellViewHolder;
 
 /**
  * Created by Emil on 21/10/17.

@@ -2,6 +2,8 @@ package id.ac.polman.astra.serojamatchmaker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements Dashboard.Callbac
     private final static String ID = "id";
     InputScoreFragment inptScoreFrg;
     private LinearLayout start;
+    private BracketsFragment bracketFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +80,16 @@ public class MainActivity extends AppCompatActivity implements Dashboard.Callbac
                 .replace(R.id.mainActivity, fragment2)
                 .addToBackStack(null)
                 .commit();
+        //initialiseBracketsFragment();
+    }
+    private void initialiseBracketsFragment() {
+
+        bracketFragment = new BracketsFragment();
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.container, bracketFragment, "brackets_home_fragment");
+        transaction.commit();
+        manager.executePendingTransactions();
     }
 
     @Override
