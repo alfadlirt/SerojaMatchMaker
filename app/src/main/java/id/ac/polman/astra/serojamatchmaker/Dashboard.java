@@ -16,15 +16,22 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import id.ac.polman.astra.serojamatchmaker.entity.Event;
+import id.ac.polman.astra.serojamatchmaker.entity.ResponseChangePassword;
 import id.ac.polman.astra.serojamatchmaker.entity.User;
 import id.ac.polman.astra.serojamatchmaker.remote.APIService;
 import id.ac.polman.astra.serojamatchmaker.utils.APIUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.content.ContentValues.TAG;
 
 public class Dashboard extends Fragment{
     SharedPreferences sharedPreferences;
@@ -35,9 +42,11 @@ public class Dashboard extends Fragment{
     private final static String ID = "id";
     private final static String PASSWORD = "password";
 
-    private TextView mId;
+    private TextView mId, mOnGoing, mFinished;
     private EditText mNama;
     private EditText mUsername;
+
+    private
 
     TextView username, name;
     public static Dashboard newInstance(){
@@ -59,12 +68,19 @@ public class Dashboard extends Fragment{
         mId = (TextView) view.findViewById(R.id.txtEditIdUser);
         mNama= (EditText) view.findViewById(R.id.txtEditName);
         mUsername = (EditText) view.findViewById(R.id.txtEditUname);
+        mOnGoing = (TextView) view.findViewById(R.id.txtCountOngoing);
+        mFinished = (TextView) view.findViewById(R.id.txtCountFinished);
 
         //Cek SharedPreferences
         String unamesp = sharedPreferences.getString(UNAME, null);
         String namesp = sharedPreferences.getString(NAMA, null);
         String idsp = sharedPreferences.getString(ID, null);
         String passsp = sharedPreferences.getString(PASSWORD, null);
+
+        mAPIService = APIUtils.getAPIService();
+        Call<Integer> callOn = mAPIService.getCountEventOngoing();
+
+        setCountDashboard(view, callOn);
 
 
         setNameAndUname(view, namesp);
@@ -106,6 +122,15 @@ public class Dashboard extends Fragment{
         });
 
         return view;
+    }
+
+
+    public void setCountDashboard(View view, Call<Integer> status){
+        TextView mOnGoing = (TextView) view.findViewById(R.id.txtCountOngoing);
+        mOnGoing.setText(status.toString());
+
+        /*TextView mFinished = (TextView) view.findViewById(R.id.txtCountFinished);
+        mFinished.setText(finished);*/
     }
 
     public void setNameAndUname(View view, String name){

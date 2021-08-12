@@ -46,7 +46,7 @@
         android:id="@+id/imgSign"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginLeft="200dp"
+        android:layout_marginLeft="180dp"
         android:src="@drawable/sign_up_pict"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

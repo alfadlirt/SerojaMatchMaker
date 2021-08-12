@@ -18,8 +18,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 
+import id.ac.polman.astra.serojamatchmaker.entity.ResponseEditUser;
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseLogin;
 import id.ac.polman.astra.serojamatchmaker.entity.User;
 import id.ac.polman.astra.serojamatchmaker.remote.APIService;
@@ -35,8 +37,8 @@ public class UserProfile extends Fragment {
     SharedPreferences sharedPreferences;
     private APIService mAPIService;
     private TextView mId;
-    private EditText mName;
-    private EditText mUsername;
+    private TextInputEditText mName;
+    private TextInputEditText mUsername;
 
     TextView txtChangePassword;
 
@@ -63,8 +65,8 @@ public class UserProfile extends Fragment {
 
         sharedPreferences = this.getActivity().getSharedPreferences(APP_NAME, Context.MODE_PRIVATE);
         mId = (TextView) view.findViewById(R.id.txtEditIdUser);
-        mName= (EditText) view.findViewById(R.id.txtEditName);
-        mUsername = (EditText) view.findViewById(R.id.txtEditUname);
+        mName= (TextInputEditText) view.findViewById(R.id.txtEditName);
+        mUsername = (TextInputEditText) view.findViewById(R.id.txtEditUname);
 
         //Cek SharedPreferences
         String unamesp = sharedPreferences.getString(UNAME, null);
@@ -135,28 +137,31 @@ public class UserProfile extends Fragment {
             return;
         }else{
             mAPIService = APIUtils.getAPIService();
-            Call<ResponseLogin> call = mAPIService.updateUser(id, name, username);
-            call.enqueue(new Callback<ResponseLogin>() {
+            Call<ResponseEditUser> call = mAPIService.updateUser(id, name, username);
+            call.enqueue(new Callback<ResponseEditUser>() {
                 @Override
-                public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
+                public void onResponse(Call<ResponseEditUser> call, Response<ResponseEditUser> response) {
                     if(response.body() != null){
-                        SharedPreferences.Editor edit = sharedPreferences.edit();
-                        Log.e(TAG, "onResponse: " + new Gson().toJson(response.body().getData()));
-                        edit.putString(UNAME, response.body().getData().getUsername());
-                        edit.putString(NAMA, response.body().getData().getName());
-                        edit.putString(ID, response.body().getData().getId());
-                        edit.putString(PASSWORD, response.body().getData().getPassword());
-                        edit.apply();
-                        ((MainActivity) getActivity()).onStartDashboard();
-                        Toast.makeText(getActivity(), "Data saved successfully", Toast.LENGTH_LONG).show();
+                        if(response.body().getSuccess()==true){
+                            SharedPreferences.Editor edit = sharedPreferences.edit();
+                            Log.e(TAG, "onResponse: " + new Gson().toJson(response.body().getData()));
+                            edit.putString(UNAME, response.body().getData().getUsername());
+                            edit.putString(NAMA, response.body().getData().getName());
+                            edit.putString(ID, response.body().getData().getId());
+                            edit.putString(PASSWORD, response.body().getData().getPassword());
+                            edit.apply();
+                            ((MainActivity) getActivity()).onStartDashboard();
+                            Toast.makeText(getActivity(), "Data saved successfully", Toast.LENGTH_LONG).show();
+                        }else if(response.body().getSuccess()==false){
+                            Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        }
 
                     }
                 }
 
                 @Override
-                public void onFailure(Call<ResponseLogin> call, Throwable t) {
+                public void onFailure(Call<ResponseEditUser> call, Throwable t) {
                     Log.e("Update Error : ", t.getMessage());
-                    Toast.makeText(getActivity(), "Data gagal tersimpan!", Toast.LENGTH_LONG).show();
                 }
             });
         }

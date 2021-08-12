@@ -34,9 +34,9 @@ public class LoginActivity extends AppCompatActivity {
     private final static String ID = "id";
     private final static String PASSWORD = "password";
 
-    LinearLayout btnLogin;
+    LinearLayout btnLogin, mLinearLayoutbtnMonitor;
     ProgressBar progressBar;
-    TextView textViewSignup, mTextViewMonitoring;
+    TextView textViewSignup;
     private APIService mAPIService;
 
 
@@ -53,9 +53,9 @@ public class LoginActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progress);
         btnLogin = findViewById(R.id.btnLogin);
         textViewSignup = findViewById(R.id.textSignup);
-        mTextViewMonitoring = findViewById(R.id.txtMonitoring);
+        mLinearLayoutbtnMonitor = findViewById(R.id.btnMonitoring);
 
-        mTextViewMonitoring.setOnClickListener(new View.OnClickListener() {
+        mLinearLayoutbtnMonitor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),monitoringActivity.class);

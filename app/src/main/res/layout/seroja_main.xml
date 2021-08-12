@@ -189,19 +189,99 @@
 
     </GridLayout>
 
+    <GridLayout
+        android:id="@+id/gridCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:columnCount="2"
+        android:rowCount="1">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/eventList"
-        android:scrollbars="none"
-        android:layout_marginTop="550dp"
-        android:clipToPadding="false"
-        android:layout_width="300dp"
-        android:layout_height="125dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="50dp"
-        android:layout_marginLeft="50dp"
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_gravity="fill"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_row="0"
+            android:layout_column="0"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            app:cardUseCompatPadding="true"
+            android:id="@+id/cardOngoing">
 
-        tools:listitem="@layout/event_list"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:id="@+id/layoutCountO">
+
+                <TextView
+                    android:id="@+id/txtCountOngoing"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:textAlignment="center"
+                    android:text="0"
+                    android:textSize="35dp"
+                    android:fontFamily="sans-serif-medium"/>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="On Going"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_row="0"
+            android:layout_column="1"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:id="@+id/layoutF">
+
+                <TextView
+                    android:id="@+id/txtCountFinished"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:textAlignment="center"
+                    android:text="0"
+                    android:textSize="35dp"
+                    android:fontFamily="sans-serif-medium"/>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Finished"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </GridLayout>
 
 
 </RelativeLayout>

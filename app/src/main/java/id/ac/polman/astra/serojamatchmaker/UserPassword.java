@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseChangePassword;
@@ -29,15 +30,17 @@ public class UserPassword extends Fragment {
 
     SharedPreferences sharedPreferences;
     private APIService mAPIService;
-    private EditText mOldPassword;
-    private EditText mNewPassword;
-    private EditText mConfirmPassword;
+    private TextInputEditText mOldPassword;
+    private TextInputEditText mNewPassword;
+    private TextInputEditText mConfirmPassword;
 
     private final static String APP_NAME = "serojamatchmaker";
     private final static String UNAME = "username";
     private final static String NAMA = "name";
     private final static String ID = "id";
     private final static String PASSWORD = "password";
+
+    TextView txtBackUser;
 
     public static UserPassword newInstance(){
         return new UserPassword();
@@ -54,15 +57,24 @@ public class UserPassword extends Fragment {
         View view = inflater.inflate(R.layout.activity_password, viewGroup, false);
 
         sharedPreferences = this.getActivity().getSharedPreferences(APP_NAME, Context.MODE_PRIVATE);
-        mOldPassword = (EditText) view.findViewById(R.id.txtOldPassword);
-        mNewPassword= (EditText) view.findViewById(R.id.txtNewPassword);
-        mConfirmPassword = (EditText) view.findViewById(R.id.txtConfirmNewPassword);
+        mOldPassword = (TextInputEditText) view.findViewById(R.id.txtOldPassword);
+        mNewPassword= (TextInputEditText) view.findViewById(R.id.txtNewPassword);
+        mConfirmPassword = (TextInputEditText) view.findViewById(R.id.txtConfirmNewPassword);
+        txtBackUser = (TextView) view.findViewById(R.id.btnBackEditUser);
 
         //Cek SharedPreferences
         String oldpasssp = sharedPreferences.getString(PASSWORD, null);
         String idsp = sharedPreferences.getString(ID, null);
 
         //mOldPassword.setText(oldpasssp);
+
+        txtBackUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(getActivity(), "old password : " + passsp, Toast.LENGTH_LONG).show();
+                ((MainActivity) getActivity()).callFragmentProfil();
+            }
+        });
 
         view.findViewById(R.id.btnSavePassword).setOnClickListener(new View.OnClickListener() {
             @Override

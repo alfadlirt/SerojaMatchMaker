@@ -2,8 +2,10 @@ package id.ac.polman.astra.serojamatchmaker.remote;
 
 import java.util.List;
 
-import id.ac.polman.astra.serojamatchmaker.entity.EventInput;
+import id.ac.polman.astra.serojamatchmaker.entity.Event;
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseChangePassword;
+import id.ac.polman.astra.serojamatchmaker.entity.ResponseEditUser;
+import id.ac.polman.astra.serojamatchmaker.entity.ResponseGetEvent;
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseLogin;
 import id.ac.polman.astra.serojamatchmaker.entity.User;
 import retrofit2.Call;
@@ -11,12 +13,9 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface APIService {
 
@@ -38,9 +37,9 @@ public interface APIService {
     //@Headers("Content-Type: application/x-www-form-urlencoded")
     @PUT("user/{id}")
     @FormUrlEncoded
-    Call<ResponseLogin> updateUser(@Path("id") String id,
-                          @Field("name") String name,
-                          @Field("username") String username);
+    Call<ResponseEditUser> updateUser(@Path("id") String id,
+                                      @Field("name") String name,
+                                      @Field("username") String username);
 
     @PUT("user/updatepassword/{id}")
     @FormUrlEncoded
@@ -49,5 +48,11 @@ public interface APIService {
                                                 @Field("newpassword") String newpassword);
 
     @GET("event")
-    Call<List<EventInput>> getEvent();
+    Call<ResponseGetEvent> getEvent();
+
+    @GET("getEventCount/ongoing")
+    Call<Integer> getCountEventOngoing();
+
+    @GET("getEventCount/finished")
+    Call<Integer> getCountEventfinished();
 }
