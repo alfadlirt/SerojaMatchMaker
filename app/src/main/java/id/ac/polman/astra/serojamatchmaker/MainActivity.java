@@ -15,15 +15,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements Dashboard.Callbacks{
+import id.ac.polman.astra.serojamatchmaker.model.BracketCard;
+import id.ac.polman.astra.serojamatchmaker.utils.UpdateScoreModal;
+
+public class MainActivity extends AppCompatActivity implements Dashboard.Callbacks, UpdateScoreModal.OnInputScore {
 
     SharedPreferences sharedPreferences;
     private final static String APP_NAME = "serojamatchmaker";
     private final static String UNAME = "username";
     private final static String NAMA = "name";
     private final static String ID = "id";
-
+    InputScoreFragment inptScoreFrg;
     private LinearLayout start;
 
     @Override
@@ -85,12 +89,19 @@ public class MainActivity extends AppCompatActivity implements Dashboard.Callbac
     }
 
     public void callFragmentProfil(){
-        Fragment fragment = UserProfile.newInstance();
+        /*Fragment fragment = UserProfile.newInstance();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.mainActivity, fragment)
                 .addToBackStack(null)
+                .commit();*/
+        inptScoreFrg = new InputScoreFragment();
+        //fragment2.setTargetFragment(,1);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mainActivity, inptScoreFrg)
+                .addToBackStack(null)
                 .commit();
     }
+
 
     public void callFragmentChangePassword(){
         Fragment fragment = UserPassword.newInstance();
@@ -100,5 +111,18 @@ public class MainActivity extends AppCompatActivity implements Dashboard.Callbac
                 .commit();
     }
 
+    public void refreshInputScore(){
+        inptScoreFrg = new InputScoreFragment();
+        //fragment2.setTargetFragment(,1);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mainActivity, inptScoreFrg)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void sendInput(BracketCard brckt) {
+        inptScoreFrg.InputScore(brckt);
+    }
 
 }

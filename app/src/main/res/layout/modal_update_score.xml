@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:tag="cards main container">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/bracket_id_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ID HERE"
+            android:textSize="20dp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/colorBlack"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:helperText="Team A"
+            android:layout_margin="10dp"
+            android:id="@+id/txt_label_team_a">
+            <EditText
+                android:id="@+id/txt_input_skor_a"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="input score"
+                android:textSize="20dp"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/colorBlack"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:helperText="Team B"
+            android:layout_margin="10dp"
+            android:id="@+id/txt_label_team_b">
+            <EditText
+                android:id="@+id/txt_input_skor_b"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="input score"
+                android:textSize="20dp"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/colorBlack"/>
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+</LinearLayout>

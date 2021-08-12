@@ -1,7 +1,10 @@
 package id.ac.polman.astra.serojamatchmaker.remote;
 
+import id.ac.polman.astra.serojamatchmaker.entity.BracketResponse;
 import id.ac.polman.astra.serojamatchmaker.entity.EventInput;
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseAddEvent;
+import id.ac.polman.astra.serojamatchmaker.entity.ResponseBracketGet;
+import id.ac.polman.astra.serojamatchmaker.entity.ResponseBracketPut;
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseChangePassword;
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseLogin;
 import id.ac.polman.astra.serojamatchmaker.entity.User;
@@ -51,4 +54,13 @@ APIService {
 
     @POST("event")
     Call<ResponseAddEvent> addEventAndTeam(@Body EventInput eventInput);
+
+    @GET("match/{id}")
+    Call<ResponseBracketGet> getEventBracket(@Path("id") String id);
+
+    @PUT("match/inputscore/{id}")
+    @FormUrlEncoded
+    Call<ResponseBracketPut> updatescore(@Path("id") String id,
+                                         @Field("skor_a") Integer skor_a,
+                                         @Field("skor_b") Integer skor_b);
 }

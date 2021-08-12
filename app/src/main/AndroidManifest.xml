@@ -15,8 +15,10 @@
         android:theme="@style/Theme.Design.Light.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity android:name=".SignUp" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".StartActivity">
+        <activity android:name=".MainActivity"
+            android:configChanges="orientation"/>
+        <activity android:name=".StartActivity"
+            android:configChanges="orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
