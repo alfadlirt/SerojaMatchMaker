@@ -1,6 +1,8 @@
 package id.ac.polman.astra.serojamatchmaker;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -30,9 +32,16 @@ import retrofit2.Response;
 
 public class EventUserFragment extends Fragment {
 
+    SharedPreferences sharedPreferences;
     Adapter2 mAdapter;
     APIService mAPIService;
     RecyclerView mRecyclerView;
+
+    private final static String APP_NAME = "serojamatchmaker";
+    private final static String UNAME = "username";
+    private final static String NAMA = "name";
+    private final static String ID = "id";
+    private final static String PASSWORD = "password";
 
     public static EventUserFragment newInstance(){
         return new EventUserFragment();
@@ -49,9 +58,52 @@ public class EventUserFragment extends Fragment {
                              Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.user_event, viewGroup, false);
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.eventDataList);
+        sharedPreferences = this.getActivity().getSharedPreferences(APP_NAME, Context.MODE_PRIVATE);
+        //Cek SharedPreferences
+        String unamesp = sharedPreferences.getString(UNAME, null);
+        String namesp = sharedPreferences.getString(NAMA, null);
+        String idsp = sharedPreferences.getString(ID, null);
+        String passsp = sharedPreferences.getString(PASSWORD, null);
 
-        EditText mSearch = (EditText) view.findViewById(R.id.txtSearchUserEvent);
+        Log.e("shared pref: ", idsp);
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.eventDataList);
+        LinearLayout mBtnEvent = (LinearLayout) view.findViewById(R.id.btnAddEvent);
+        mBtnEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        SearchView mSearch = (SearchView) view.findViewById(R.id.txtSearchUserEvent);
+        //mSearch.setQuery(idsp, true);
+
+        mSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                //mAdapter.getFilter().filter(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                if (newText!= null )
+                {
+                    if (newText.isEmpty()){
+                        search();
+                    }
+                    else{
+                        mAdapter.getFilter().filter(newText);
+                    }
+                }
+                return true;
+            }
+        });
+
+        /*EditText mSearch = (EditText) view.findViewById(R.id.txtSearchUserEvent);
+        mSearch.setText(idsp);
 
         mSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -64,9 +116,10 @@ public class EventUserFragment extends Fragment {
             }
             @Override
             public void afterTextChanged(Editable s) {
+                mSearch.setText(idsp);
                 mAdapter.getFilter().filter(s);
             }
-        });
+        });*/
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -76,6 +129,13 @@ public class EventUserFragment extends Fragment {
     }
 
     private void search(){
+        sharedPreferences = this.getActivity().getSharedPreferences(APP_NAME, Context.MODE_PRIVATE);
+        //Cek SharedPreferences
+        String unamesp = sharedPreferences.getString(UNAME, null);
+        String namesp = sharedPreferences.getString(NAMA, null);
+        String idsp = sharedPreferences.getString(ID, null);
+        String passsp = sharedPreferences.getString(PASSWORD, null);
+
         mAPIService = APIUtils.getAPIService();
         Call<ResponseGetEvent> call = mAPIService.getEvent();
 
@@ -83,6 +143,16 @@ public class EventUserFragment extends Fragment {
             @Override
             public void onResponse(Call<ResponseGetEvent> call, Response<ResponseGetEvent> response) {
                 if (response.isSuccessful()) {
+                    /*for(int i = 0; i<response.body().getData().size(); i++){
+                        String libId = response.body().getData().get(i).getUserId();
+                        libId = "USR0000005";
+                        if(idsp == libId){
+                            List<Event> posts = response.body().getData();
+                            mAdapter = new Adapter2(getActivity(), posts);
+                            mRecyclerView.setAdapter(mAdapter);
+                        }
+                    }*/
+
                     List<Event> posts = response.body().getData();
                     mAdapter = new Adapter2(getActivity(), posts);
                     mRecyclerView.setAdapter(mAdapter);

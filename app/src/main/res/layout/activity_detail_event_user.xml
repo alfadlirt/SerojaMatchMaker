@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailEvent">
+    tools:context=".DetailEventUser">
 
     <TextView
-        android:id="@+id/detail_event"
+        android:id="@+id/detail_Uevent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
-        android:text="Detail Event"
+        android:text="Detail UservEvent"
         android:textColor="@color/colorBlack"
         android:textSize="25dp"
         android:textStyle="bold"
@@ -23,7 +22,7 @@
         app:layout_constraintVertical_bias="0.071" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textDtLayoutNameEvent"
+        android:id="@+id/textDtLayoutNameUEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Id"
@@ -33,7 +32,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias=".0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detail_event"
+        app:layout_constraintTop_toBottomOf="@id/detail_Uevent"
         >
 
         <TextView
@@ -46,11 +45,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="event name"
-            android:id="@+id/txtDtEventName"/>
+            android:id="@+id/txtDtUEventName"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textDtLayoutTeamtEvent"
+        android:id="@+id/textDtLayoutTeamtUEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Id"
@@ -59,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias=".0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textDtLayoutNameEvent"
+        app:layout_constraintTop_toBottomOf="@id/textDtLayoutNameUEvent"
         >
 
         <TextView
@@ -72,11 +71,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="event team"
-            android:id="@+id/txtDtEventTeam"/>
+            android:id="@+id/txtDtUEventTeam"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textDtLayoutTypetEvent"
+        android:id="@+id/textDtLayoutTypetUEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Id"
@@ -85,7 +84,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias=".0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textDtLayoutTeamtEvent"
+        app:layout_constraintTop_toBottomOf="@id/textDtLayoutTeamtUEvent"
         >
 
         <TextView
@@ -98,11 +97,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Knockout"
-            android:id="@+id/txtDtEventType"/>
+            android:id="@+id/txtDtUEventType"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textDtLayoutStatustEvent"
+        android:id="@+id/textDtLayoutStatustUEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Id"
@@ -111,7 +110,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias=".0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textDtLayoutTypetEvent"
+        app:layout_constraintTop_toBottomOf="@id/textDtLayoutTypetUEvent"
         >
 
         <TextView
@@ -124,7 +123,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="event status"
-            android:id="@+id/txtDtEventStatus"/>
+            android:id="@+id/txtDtUEventStatus"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -137,7 +136,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias=".0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textDtLayoutStatustEvent"
+        app:layout_constraintTop_toBottomOf="@id/textDtLayoutStatustUEvent"
         >
 
         <TextView
@@ -150,7 +149,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="17-12-17"
-            android:id="@+id/txtDtEventModif"/>
+            android:id="@+id/txtDtUEventModif"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
