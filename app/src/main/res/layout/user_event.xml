@@ -8,7 +8,7 @@
     android:background="@color/white">
 
 
-    <EditText
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/txtSearchUserEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -17,13 +17,32 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/eventDataList"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_height="500dp"
         android:layout_marginTop="70dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:clipToPadding="false"
         android:scrollbars="none"
         tools:listitem="@layout/event_list" />
+
+    <LinearLayout
+        android:id="@+id/btnAddEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        >
+
+        <ImageView
+            android:id="@+id/imgAdd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_baseline_add_box_24" />
+
+    </LinearLayout>
 
 
 </RelativeLayout>
