@@ -2,6 +2,7 @@ package id.ac.polman.astra.serojamatchmaker;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +33,7 @@ public class Adapter2 extends RecyclerView.Adapter<Adapter2.AdapterHolder> imple
     @NonNull
     @Override
     public Adapter2.AdapterHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.event_list, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.event_list_2, parent, false);
         Adapter2.AdapterHolder holder = new Adapter2.AdapterHolder(view);
         return holder;
     }
@@ -47,20 +48,7 @@ public class Adapter2 extends RecyclerView.Adapter<Adapter2.AdapterHolder> imple
         holder.name.setText(name);
         holder.team.setText(Integer.toString(team) + " Teams    -   Knockout");
         holder.status.setText(status);
-
-        holder.select.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, DetailEvent.class);
-                intent.putExtra("data", event);
-                intent.putExtra("event_name", event.getEventName().toString());
-                intent.putExtra("number_of_team", Integer.toString(event.getNumberOfTeam()));
-                intent.putExtra("status", event.getStatus().toString());
-                intent.putExtra("last_modified", event.getLastModified());
-                mContext.startActivity(intent);
-                Log.e("Adapter","Berhasil Masuk DeEtail Event");
-            }
-        });
+        holder.id=event.getId();
 
     }
 
@@ -111,8 +99,9 @@ public class Adapter2 extends RecyclerView.Adapter<Adapter2.AdapterHolder> imple
 
     public class AdapterHolder extends RecyclerView.ViewHolder {
         TextView name, team, status;
+        String id;
+        LinearLayout select, btnUpdate;
 
-        LinearLayout select;
 
         public AdapterHolder(@NonNull View itemView) {
             super(itemView);
@@ -121,6 +110,25 @@ public class Adapter2 extends RecyclerView.Adapter<Adapter2.AdapterHolder> imple
             team = itemView.findViewById(R.id.eventTeam);
             status = itemView.findViewById(R.id.eventStatus);
             select = itemView.findViewById(R.id.selectEvent);
+            btnUpdate = itemView.findViewById(R.id.btnUpdateScore);
+            select.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, DetailEvent.class);
+                    intent.putExtra("id_event", id);
+                    mContext.startActivity(intent);
+                    Log.e("Adapter","Berhasil Masuk DeEtail Event");
+                }
+            });
+            btnUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    //bundle.putParcelable("event", event);
+                    bundle.putString("id_event", id);
+                    ((MainActivity)mContext).callFragmentScore(bundle);
+                }
+            });
         }
     }
 }

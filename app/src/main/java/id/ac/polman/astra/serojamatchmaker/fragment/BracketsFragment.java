@@ -135,7 +135,7 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
 
         loadingDialog.startLoading("Loading Bracket..");
         mAPIService = APIUtils.getAPIService();
-        Call<ResponseBracketGet> call = mAPIService.getEventBracket("EVT0000001");
+        Call<ResponseBracketGet> call = mAPIService.getEventBracket(idEvent);
 
         call.enqueue(new Callback<ResponseBracketGet>() {
             @Override

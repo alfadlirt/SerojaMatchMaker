@@ -54,6 +54,8 @@ public class InputScoreFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<BracketCard> list = new ArrayList<>();
+    String id_event;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -97,6 +99,7 @@ public class InputScoreFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
+            id_event=bundle.getString("id_event");
             event = bundle.getParcelable("event");
         }
 
@@ -115,7 +118,7 @@ public class InputScoreFragment extends Fragment {
 
 
         mAPIService = APIUtils.getAPIService();
-        Call<ResponseBracketGet> call = mAPIService.getEventBracket("EVT0000001");
+        Call<ResponseBracketGet> call = mAPIService.getEventBracket(id_event);
 
         call.enqueue(new Callback<ResponseBracketGet>() {
             @Override
@@ -213,7 +216,9 @@ public class InputScoreFragment extends Fragment {
                 if(response.isSuccessful()){
 
                         //BracketResponse rtr = (BracketResponse) response.body().getData();
-                    ((MainActivity) getActivity()).refreshInputScore();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id_event", id_event);
+                    ((MainActivity) getActivity()).refreshInputScore(bundle);
                     loadingDialog.stopLoading();
                     Toast.makeText(getActivity(), "Data saved successfully", Toast.LENGTH_LONG).show();
 

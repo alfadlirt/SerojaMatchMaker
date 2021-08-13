@@ -1,5 +1,7 @@
 package id.ac.polman.astra.serojamatchmaker;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -51,6 +53,13 @@ public class TeamFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    SharedPreferences sharedPreferences;
+    private final static String APP_NAME = "serojamatchmaker";
+    private final static String UNAME = "username";
+    private final static String NAMA = "name";
+    private final static String ID = "id";
+    private final static String PASSWORD = "password";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -105,6 +114,13 @@ public class TeamFragment extends Fragment {
         View view = inflater.inflate(R.layout.layout_add_team, container, false);
         // Inflate the layout for this fragment
 
+        sharedPreferences = this.getActivity().getSharedPreferences(APP_NAME, Context.MODE_PRIVATE);
+        //Cek SharedPreferences
+        String unamesp = sharedPreferences.getString(UNAME, null);
+        String namesp = sharedPreferences.getString(NAMA, null);
+        String idsp = sharedPreferences.getString(ID, null);
+        String passsp = sharedPreferences.getString(PASSWORD, null);
+
         mRecyclerView = view.findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
@@ -139,8 +155,11 @@ public class TeamFragment extends Fragment {
                                     e.printStackTrace();
                                 }
                                 mAPIService = APIUtils.getAPIService();
+
+
+
                                 Call<ResponseAddEvent> call = mAPIService.addEventAndTeam(
-                                        new EventInput("USR0000005",event.getEvent_name(),event.getNumber_of_team(),event.getElimination_type(),team_list_json));
+                                        new EventInput(idsp,event.getEvent_name(),event.getNumber_of_team(),event.getElimination_type(),team_list_json));
 
                                 call.enqueue(new Callback<ResponseAddEvent>() {
                                     @Override

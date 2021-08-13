@@ -78,4 +78,7 @@ APIService {
 
     @GET("event/{id}")
     Call<ResponseEventGet> getEvent(@Path("id") String id);
+
+    @GET("getEventUser/{id}")
+    Call<ResponseGetEvent> getEventByUser(@Path("id") String id);
 }

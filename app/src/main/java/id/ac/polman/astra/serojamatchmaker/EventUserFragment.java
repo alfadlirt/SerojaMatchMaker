@@ -129,7 +129,7 @@ public class EventUserFragment extends Fragment {
         String passsp = sharedPreferences.getString(PASSWORD, null);
 
         mAPIService = APIUtils.getAPIService();
-        Call<ResponseGetEvent> call = mAPIService.getEvent();
+        Call<ResponseGetEvent> call = mAPIService.getEventByUser(idsp);
 
         call.enqueue(new Callback<ResponseGetEvent>() {
             @Override

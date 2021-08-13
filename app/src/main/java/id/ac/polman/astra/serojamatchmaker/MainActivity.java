@@ -114,6 +114,15 @@ public class MainActivity extends AppCompatActivity implements Dashboard.Callbac
                 .commit();*/
     }
 
+    public void callFragmentScore(Bundle bundle){
+        inptScoreFrg = new InputScoreFragment();
+        inptScoreFrg.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mainActivity, inptScoreFrg)
+                .addToBackStack(null)
+                .commit();
+    }
+
     public void callFragmentEventList(){
         Fragment fragment = EventUserFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
@@ -130,9 +139,10 @@ public class MainActivity extends AppCompatActivity implements Dashboard.Callbac
                 .commit();
     }
 
-    public void refreshInputScore(){
+    public void refreshInputScore(Bundle bundle){
         inptScoreFrg = new InputScoreFragment();
         //fragment2.setTargetFragment(,1);
+        inptScoreFrg.setArguments(bundle);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.mainActivity, inptScoreFrg)
                 .addToBackStack(null)

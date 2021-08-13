@@ -63,8 +63,8 @@ public class Dashboard extends Fragment{
         mId = (TextView) view.findViewById(R.id.txtEditIdUser);
         mNama= (EditText) view.findViewById(R.id.txtEditName);
         mUsername = (EditText) view.findViewById(R.id.txtEditUname);
-        mOnGoing = (TextView) view.findViewById(R.id.txtCountOngoing);
-        mFinished = (TextView) view.findViewById(R.id.txtCountFinished);
+        //mOnGoing = (TextView) view.findViewById(R.id.txtCountOngoing);
+        //mFinished = (TextView) view.findViewById(R.id.txtCountFinished);
 
         //Cek SharedPreferences
         String unamesp = sharedPreferences.getString(UNAME, null);
@@ -74,9 +74,6 @@ public class Dashboard extends Fragment{
 
         mAPIService = APIUtils.getAPIService();
         Call<Integer> callOn = mAPIService.getCountEventOngoing();
-
-        setCountDashboard(view, callOn);
-
 
         setNameAndUname(view, namesp);
 
@@ -132,13 +129,6 @@ public class Dashboard extends Fragment{
     }
 
 
-    public void setCountDashboard(View view, Call<Integer> status){
-        TextView mOnGoing = (TextView) view.findViewById(R.id.txtCountOngoing);
-        mOnGoing.setText(status.toString());
-
-        /*TextView mFinished = (TextView) view.findViewById(R.id.txtCountFinished);
-        mFinished.setText(finished);*/
-    }
 
     public void setNameAndUname(View view, String name){
         TextView m_name = (TextView) view.findViewById(R.id.nameUser);
