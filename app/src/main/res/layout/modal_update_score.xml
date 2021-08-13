@@ -29,6 +29,7 @@
                 android:id="@+id/txt_input_skor_a"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="numberSigned"
                 android:hint="input score"
                 android:textSize="20dp"
                 android:fontFamily="sans-serif"
@@ -43,6 +44,7 @@
             android:id="@+id/txt_label_team_b">
             <EditText
                 android:id="@+id/txt_input_skor_b"
+                android:inputType="numberSigned"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="input score"

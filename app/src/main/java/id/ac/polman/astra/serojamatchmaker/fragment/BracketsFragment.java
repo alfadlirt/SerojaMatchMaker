@@ -6,26 +6,34 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 import id.ac.polman.astra.serojamatchmaker.R;
+import id.ac.polman.astra.serojamatchmaker.adapter.BracketListAdapter;
 import id.ac.polman.astra.serojamatchmaker.adapter.BracketsSectionAdapter;
 import id.ac.polman.astra.serojamatchmaker.customview.WrapContentHeightViewPager;
+import id.ac.polman.astra.serojamatchmaker.entity.ResponseBracketGet;
+import id.ac.polman.astra.serojamatchmaker.model.BracketArrayed;
+import id.ac.polman.astra.serojamatchmaker.model.BracketCard;
 import id.ac.polman.astra.serojamatchmaker.model.ColomnData;
 import id.ac.polman.astra.serojamatchmaker.model.CompetitorData;
 import id.ac.polman.astra.serojamatchmaker.model.MatchData;
+import id.ac.polman.astra.serojamatchmaker.remote.APIService;
+import id.ac.polman.astra.serojamatchmaker.utils.APIUtils;
 import id.ac.polman.astra.serojamatchmaker.utils.BracketsUtility;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-
-/**
- * Created by Emil on 21/10/17.
- */
 
 public class BracketsFragment extends Fragment implements ViewPager.OnPageChangeListener {
 
@@ -34,6 +42,7 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
     private ArrayList<ColomnData> sectionList;
     private int mNextSelectedScreen;
     private int mCurrentPagerState;
+    private APIService mAPIService;
 
 
     @Nullable
@@ -47,12 +56,143 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
         super.onActivityCreated(savedInstanceState);
         initViews();
         setData();
-        intialiseViewPagerAdapter();
+        //intialiseViewPagerAdapter();
     }
 
     private void setData() {
         sectionList = new ArrayList<>();
+
+
+        mAPIService = APIUtils.getAPIService();
+        Call<ResponseBracketGet> call = mAPIService.getEventBracket("EVT0000001");
+
+        call.enqueue(new Callback<ResponseBracketGet>() {
+            @Override
+            public void onResponse(Call<ResponseBracketGet> call, Response<ResponseBracketGet> response) {
+                if(response.isSuccessful()){
+                    if(response.body().getSuccess()==true) {
+                        int current = response.body().getData().get(0).getStageNumber();
+                        int bracketBound = response.body().getData().get(0).getStageNumber()*2;
+                        int counterStage = 0;
+
+                        List<BracketArrayed> bracketArrayed = new ArrayList<>();
+                        bracketArrayed.add(new BracketArrayed());
+                        for(int i = 0; i <response.body().getData().size(); i++){
+                            if(current!=response.body().getData().get(i).getStageNumber()){
+                                counterStage++;
+                                current = response.body().getData().get(i).getStageNumber();
+                                bracketArrayed.add(new BracketArrayed());
+                            }
+                            BracketCard bracketcard = new BracketCard();
+                            bracketcard.setStage_type(response.body().getData().get(i).getStageType());
+                            if(response.body().getData().get(i).getIsWo()==null){
+                                bracketcard.setIs_wo(false);
+                            }
+                            else if(response.body().getData().get(i).getIsWo()==1){
+                                bracketcard.setIs_wo(true);
+                            }
+                            else{
+                                bracketcard.setIs_wo(false);
+                            }
+
+                            if(response.body().getData().get(i).getIsWoMoved()==null){
+                                bracketcard.setIs_wo_moved(false);
+                            }
+                            else if(response.body().getData().get(i).getIsWoMoved()==1){
+                                bracketcard.setIs_wo_moved(true);
+                            }
+                            else if(response.body().getData().get(i).getIsWoMoved()==0){
+                                bracketcard.setIs_wo_moved(false);
+                            }
+
+                            if(response.body().getData().get(i).getIsEnd()==1){
+                                bracketcard.setTeam_a_name(response.body().getData().get(i).getTeamA());
+                                bracketcard.setTeam_b_name(response.body().getData().get(i).getTeamB());
+                                if(response.body().getData().get(i).getStatus().equals("FINISHED")){
+                                    bracketcard.setSkor_a_name(response.body().getData().get(i).getSkorA());
+                                    bracketcard.setSkor_b_name(response.body().getData().get(i).getSkorB());
+                                }
+                            }
+                            else if(response.body().getData().get(i).getIsWo()==0&&
+                                    response.body().getData().get(i).getIsEnd()==0){
+                                bracketcard.setTeam_a_name(response.body().getData().get(i).getTeamA());
+                                bracketcard.setTeam_b_name(response.body().getData().get(i).getTeamB());
+                                if(response.body().getData().get(i).getStatus().equals("FINISHED")){
+                                    bracketcard.setSkor_a_name(response.body().getData().get(i).getSkorA());
+                                    bracketcard.setSkor_b_name(response.body().getData().get(i).getSkorB());
+                                }
+                            }
+                            else{
+                                if(response.body().getData().get(i).getTeamA()==null){
+                                    bracketcard.setTeam_b_name(response.body().getData().get(i).getTeamB());
+                                }
+                                else{
+                                    bracketcard.setTeam_a_name(response.body().getData().get(i).getTeamA());
+                                }
+                            }
+                            bracketArrayed.get(counterStage).addBracket(bracketcard, response.body().getData().get(i).getIndexNumber());
+                            Log.e("Update Error : ","ASD");
+
+                        }
+
+                        sectionList = new ArrayList<>();
+                        CompetitorData competitorNull = new CompetitorData("-", "-");
+                        for(int i = 0; i<bracketArrayed.size();i++){
+                            ArrayList<MatchData> ColumnNmatchesList = new ArrayList<>();
+                            BracketCard[] stageArray = bracketArrayed.get(i).getBracket();
+                            for(int j=1;j<=bracketBound;j++){
+                                MatchData matchData;
+                                if(stageArray[j]==null){
+                                    matchData = new MatchData(competitorNull, competitorNull);
+                                }
+                                else{
+                                    if(stageArray[j].getIs_wo()){
+                                        if(stageArray[j].getTeam_a_name()==null){
+                                            matchData = new
+                                                    MatchData(
+                                                    new CompetitorData("-", "-"),
+                                                    new CompetitorData(stageArray[j].getTeam_b_name(), Integer.toString(stageArray[j].getSkor_b_name())));
+                                        }
+                                        else{
+                                            matchData = new
+                                                    MatchData(
+                                                    new CompetitorData(stageArray[j].getTeam_a_name(), Integer.toString(stageArray[j].getSkor_a_name())),
+                                                    new CompetitorData("-", "-"));
+                                        }
+                                    }
+                                    else{
+                                        matchData = new
+                                                MatchData(
+                                                new CompetitorData(stageArray[j].getTeam_a_name(), Integer.toString(stageArray[j].getSkor_a_name())),
+                                                new CompetitorData(stageArray[j].getTeam_b_name(), Integer.toString(stageArray[j].getSkor_b_name())));
+                                    }
+
+                                }
+
+                                ColumnNmatchesList.add(matchData);
+
+                            }
+                            ColomnData colomnData = new ColomnData(ColumnNmatchesList);
+                            sectionList.add(colomnData);
+                            bracketBound=bracketBound/2;
+                        }
+                        Log.e("Update Error : ","ASD");
+                    }else{
+
+                    }
+                }
+                Log.e("Update Error : ","ASD");
+                intialiseViewPagerAdapter();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBracketGet> call, Throwable t) {
+                Log.e("Update Error : ", t.getMessage());
+                Toast.makeText(getActivity(), "Data gagal tersimpan!", Toast.LENGTH_LONG).show();
+            }
+        });
         //-----------
+        /*
         ArrayList<MatchData> Colomn1matchesList = new ArrayList<>();
         ArrayList<MatchData> colomn2MatchesList = new ArrayList<>();
         ArrayList<MatchData> colomn3MatchesList = new ArrayList<>();
@@ -101,6 +241,8 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
         colomn3MatchesList.add(matchData7);
         ColomnData colomnData3 = new ColomnData(colomn3MatchesList);
         sectionList.add(colomnData3);
+        */
+
 
     }
 

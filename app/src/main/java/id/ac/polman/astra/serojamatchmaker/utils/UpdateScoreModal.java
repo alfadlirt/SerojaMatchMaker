@@ -68,13 +68,18 @@ public class UpdateScoreModal extends DialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Integer skorA = Integer.parseInt(txtTeamA.getText().toString());
                         Integer skorB = Integer.parseInt(txtTeamB.getText().toString());
-                        //listener.applyTexts(username, password);
-                        //InputScoreFragment fragment = (InputScoreFragment) getActivity().getFragmentManager().findFragmentByTag("InputScoreFragment");
-                        BracketCard brckt = new BracketCard();
-                        brckt.setId_bracket(id.getText().toString());
-                        brckt.setSkor_a_name(skorA);
-                        brckt.setSkor_b_name(skorB);
-                        mOnInputScore.sendInput(brckt);
+                        if(skorA==skorB){
+                            txtTeamA.setError("Same Value!");
+                            txtTeamB.setError("Same Value!");
+                            txtTeamB.requestFocus();
+                            return;
+                        }else{
+                            BracketCard brckt = new BracketCard();
+                            brckt.setId_bracket(id.getText().toString());
+                            brckt.setSkor_a_name(skorA);
+                            brckt.setSkor_b_name(skorB);
+                            mOnInputScore.sendInput(brckt);
+                        }
                     }
                 });
         return builder.create();

@@ -1,14 +1,14 @@
 package id.ac.polman.astra.serojamatchmaker.model;
 
 public class BracketCard {
-    private String id_bracket;
+    private String id_bracket="";
     private String team_a_name="waiting team...";
     private Integer skor_a_name=0;
     private String team_b_name="waiting team...";
     private Integer skor_b_name=0;
-    private boolean is_wo;
-    private boolean is_wo_moved;
-    private String stage_type;
+    private boolean is_wo=false;
+    private boolean is_wo_moved=false;
+    private String stage_type="";
 
     public boolean isIs_wo_moved() {
         return is_wo_moved;
@@ -30,7 +30,7 @@ public class BracketCard {
         this.is_wo_moved = is_wo_moved;
     }
 
-    private String status;
+    private String status="";
 
     public boolean isIs_wo() {
         return is_wo;
