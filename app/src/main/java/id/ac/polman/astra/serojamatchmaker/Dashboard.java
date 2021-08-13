@@ -103,6 +103,7 @@ public class Dashboard extends Fragment{
                 ((MainActivity) getActivity()).callFragmentProfil();
             }
         });
+
 /*
         LinearLayout logoutButton = (LinearLayout) view.findViewById(R.id.logoutbtn);
         logoutButton.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +113,7 @@ public class Dashboard extends Fragment{
                 //((MainActivity) getActivity()).callDetailFragment();
             }
         });
-        */
+*/
 
 
         SharedPreferences preferences = this.getActivity().getSharedPreferences(APP_NAME, Context.MODE_PRIVATE);

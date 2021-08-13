@@ -101,17 +101,17 @@ public class MainActivity extends AppCompatActivity implements Dashboard.Callbac
     }
 
     public void callFragmentProfil(){
-        /*Fragment fragment = UserProfile.newInstance();
+        Fragment fragment = UserProfile.newInstance();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.mainActivity, fragment)
                 .addToBackStack(null)
-                .commit();*/
-        inptScoreFrg = new InputScoreFragment();
+                .commit();
+        /*inptScoreFrg = new InputScoreFragment();
         //fragment2.setTargetFragment(,1);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.mainActivity, inptScoreFrg)
                 .addToBackStack(null)
-                .commit();
+                .commit();*/
     }
 
     public void callFragmentEventList(){
