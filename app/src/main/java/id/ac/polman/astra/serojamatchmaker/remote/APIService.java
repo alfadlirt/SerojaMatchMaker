@@ -1,18 +1,16 @@
 package id.ac.polman.astra.serojamatchmaker.remote;
 
-<<<<<<< HEAD
 import java.util.List;
 
 import id.ac.polman.astra.serojamatchmaker.entity.Event;
-=======
 import id.ac.polman.astra.serojamatchmaker.entity.BracketResponse;
 import id.ac.polman.astra.serojamatchmaker.entity.EventInput;
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseAddEvent;
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseBracketGet;
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseBracketPut;
->>>>>>> merging-splash-event
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseChangePassword;
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseEditUser;
+import id.ac.polman.astra.serojamatchmaker.entity.ResponseEventGet;
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseGetEvent;
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseLogin;
 import id.ac.polman.astra.serojamatchmaker.entity.User;
@@ -57,7 +55,6 @@ APIService {
                                                 @Field("oldpassword") String oldpassword,
                                                 @Field("newpassword") String newpassword);
 
-<<<<<<< HEAD
     @GET("event")
     Call<ResponseGetEvent> getEvent();
 
@@ -66,7 +63,7 @@ APIService {
 
     @GET("getEventCount/finished")
     Call<Integer> getCountEventfinished();
-=======
+
     @POST("event")
     Call<ResponseAddEvent> addEventAndTeam(@Body EventInput eventInput);
 
@@ -78,5 +75,7 @@ APIService {
     Call<ResponseBracketPut> updatescore(@Path("id") String id,
                                          @Field("skor_a") Integer skor_a,
                                          @Field("skor_b") Integer skor_b);
->>>>>>> merging-splash-event
+
+    @GET("event/{id}")
+    Call<ResponseEventGet> getEvent(@Path("id") String id);
 }

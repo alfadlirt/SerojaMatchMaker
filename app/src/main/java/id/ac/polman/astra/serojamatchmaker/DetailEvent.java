@@ -12,7 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import id.ac.polman.astra.serojamatchmaker.entity.Event;
+import java.sql.Date;
+
+import id.ac.polman.astra.serojamatchmaker.model.Event;
+import id.ac.polman.astra.serojamatchmaker.fragment.BracketsFragment;
+import id.ac.polman.astra.serojamatchmaker.model.EventParcelData;
+import id.ac.polman.astra.serojamatchmaker.utils.CustomLoading;
 
 public class DetailEvent extends AppCompatActivity {
 
@@ -21,45 +26,37 @@ public class DetailEvent extends AppCompatActivity {
     TextView mName, mNOT, mType, mStatus, mLastM;
 
     private Event mEvent;
-
+    CustomLoading loadingDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_event);
 
-        mName = findViewById(R.id.txtDtEventName);
-        mNOT = findViewById(R.id.txtDtEventName);
-        mType = findViewById(R.id.txtDtEventName);
-        mStatus =  findViewById(R.id.txtDtEventName);
-        mLastM = findViewById(R.id.txtDtEventName);
-
+/*
         String name = getIntent().getStringExtra("event_name");
         mName.setText(name);
 
         String team = getIntent().getStringExtra("number_of_team");
         mNOT.setText(team);
 
-        String status = getIntent().getStringExtra("status");
+        String status = ;
         mStatus.setText(status);
 
-        String modif = getIntent().getStringExtra("last_modified");
+        String modif = ;
         mLastM.setText(modif);
+*/
 
-        /*Intent intent = getIntent();
-        if(intent.getExtras() != null) {
-            mEvent = (Event) intent.getSerializableExtra("data");
-            mName.setText(mEvent.getEventName());
-            mNOT.setText(mEvent.getNumberOfTeam());
-            mType.setText("Knockout");
-            mStatus.setText(mEvent.getStatus());
-            mLastM.setText(mEvent.getLastModified().toString());
-            *//*mName.setText("name");
-            mNOT.setText("Number team");
-            mType.setText("Knockout");
-            mStatus.setText("status");
-            mLastM.setText("17-17-17");*//*
-        }*/
+        Bundle bundle = new Bundle();
+        bundle.putString("id_event",getIntent().getStringExtra("id_event"));
+        //loadingDialog.startLoading("Updating Score");
+        BracketsFragment fragment2 = new BracketsFragment();
+        fragment2.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container_detail, fragment2)
+                .addToBackStack(null)
+                .commit();
+        //loadingDialog.stopLoading();
     }
 
 

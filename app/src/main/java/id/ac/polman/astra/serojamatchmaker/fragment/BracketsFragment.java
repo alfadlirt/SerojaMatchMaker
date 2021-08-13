@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -21,15 +22,20 @@ import id.ac.polman.astra.serojamatchmaker.R;
 import id.ac.polman.astra.serojamatchmaker.adapter.BracketListAdapter;
 import id.ac.polman.astra.serojamatchmaker.adapter.BracketsSectionAdapter;
 import id.ac.polman.astra.serojamatchmaker.customview.WrapContentHeightViewPager;
+import id.ac.polman.astra.serojamatchmaker.entity.AddEventReturnData;
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseBracketGet;
+import id.ac.polman.astra.serojamatchmaker.entity.ResponseEventGet;
 import id.ac.polman.astra.serojamatchmaker.model.BracketArrayed;
 import id.ac.polman.astra.serojamatchmaker.model.BracketCard;
 import id.ac.polman.astra.serojamatchmaker.model.ColomnData;
 import id.ac.polman.astra.serojamatchmaker.model.CompetitorData;
+import id.ac.polman.astra.serojamatchmaker.model.Event;
+import id.ac.polman.astra.serojamatchmaker.model.EventParcelData;
 import id.ac.polman.astra.serojamatchmaker.model.MatchData;
 import id.ac.polman.astra.serojamatchmaker.remote.APIService;
 import id.ac.polman.astra.serojamatchmaker.utils.APIUtils;
 import id.ac.polman.astra.serojamatchmaker.utils.BracketsUtility;
+import id.ac.polman.astra.serojamatchmaker.utils.CustomLoading;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,26 +49,91 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
     private int mNextSelectedScreen;
     private int mCurrentPagerState;
     private APIService mAPIService;
+    EventParcelData eventData;
+    CustomLoading loadingDialog = new CustomLoading(getActivity());
+    TextView mEventID;
+    TextView mEventName;
+    TextView mEventTeam;
+    TextView mEventType;
+    TextView mEventCreated;
+    TextView mEventModified;
+    TextView mEventStatus;
+    String idEvent;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle bundle = this.getArguments();
+        loadingDialog = new CustomLoading(getActivity());
+        if (bundle != null) {
+            //this.eventData = bundle.getParcelable("eventData");
+            this.idEvent = bundle.getString("id_event").toString();
+        }
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_brackts, container, false);
+        View view = inflater.inflate(R.layout.fragment_brackts, container, false);
+
+        fillDetail(view);
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         initViews();
         setData();
         //intialiseViewPagerAdapter();
     }
 
+    private void fillDetail(View view){
+
+        // Inflate the layout for this fragment
+        mEventID = (TextView) view.findViewById(R.id.txtID);
+        mEventName = (TextView) view.findViewById(R.id.txtName);
+        mEventTeam = (TextView) view.findViewById(R.id.txtTeam);
+        mEventType = (TextView) view.findViewById(R.id.txtType);
+        mEventCreated = (TextView) view.findViewById(R.id.txtCreated);
+        mEventModified = (TextView) view.findViewById(R.id.txtModified);
+        mEventStatus = (TextView) view.findViewById(R.id.txtStatus);
+        //loadingDialog.startLoading("Loading Event Info..");
+        mAPIService = APIUtils.getAPIService();
+        Call<ResponseEventGet> call = mAPIService.getEvent(this.idEvent);
+
+        call.enqueue(new Callback<ResponseEventGet>() {
+            @Override
+            public void onResponse(Call<ResponseEventGet> call, Response<ResponseEventGet> response) {
+                if(response.isSuccessful()){
+                    if(response.body().getSuccess()==true) {
+                        mEventID.setText(response.body().getData().getId());
+                        mEventName.setText(response.body().getData().getEventName());
+                        mEventTeam.setText(response.body().getData().getNumberOfTeam());
+                        mEventCreated.setText(response.body().getData().getDateCreated());
+                        mEventModified.setText(response.body().getData().getLastModified());
+                        mEventStatus.setText(response.body().getData().getStatus());
+                    }else{
+
+                    }
+                    //loadingDialog.stopLoading();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseEventGet> call, Throwable t) {
+                Log.e("Update Error : ", t.getMessage());
+                Toast.makeText(getActivity(), "Data gagal tersimpan!", Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
     private void setData() {
         sectionList = new ArrayList<>();
 
-
+        loadingDialog.startLoading("Loading Bracket..");
         mAPIService = APIUtils.getAPIService();
         Call<ResponseBracketGet> call = mAPIService.getEventBracket("EVT0000001");
 
@@ -182,7 +253,9 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
                     }
                 }
                 Log.e("Update Error : ","ASD");
+                loadingDialog.stopLoading();
                 intialiseViewPagerAdapter();
+
             }
 
             @Override

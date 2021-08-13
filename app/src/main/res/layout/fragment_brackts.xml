@@ -1,51 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_main"
-    android:orientation="vertical">
-    <ScrollView
-        android:id="@+id/detail_view"
+    android:background="@drawable/bg_main">
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:orientation="vertical"
-        android:scrollbars="vertical">
+        android:layout_marginTop="300px">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="10dp">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:helperText="Event ID"
-                android:layout_margin="10dp">
-                <TextView
-                    android:id="@+id/txt_EventID"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Event ID Here"
-                    android:textSize="20dp"
-                    android:fontFamily="sans-serif"
-                    android:textColor="@color/colorBlack"/>
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:helperText="Event Name"
-                android:layout_margin="10dp">
-                <TextView
-                    android:id="@+id/txt_EventName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Event Name Here"
-                    android:textSize="20dp"
-                    android:fontFamily="sans-serif"
-                    android:textColor="@color/colorBlack"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp">
+                        <TextView
+                            android:id="@+id/labelID"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Event ID"
+                            android:textSize="10dp"
+                            android:fontFamily="sans-serif"
+                            android:textColor="@color/colorBlack"/>
+                        <TextView
+                            android:id="@+id/txtID"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Number Of Team Here"
+                            android:textSize="15dp"
+                            android:fontFamily="sans-serif"
+                            android:textColor="@color/colorBlack"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp">
+                        <TextView
+                            android:id="@+id/labelName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Event Name"
+                            android:textSize="10dp"
+                            android:fontFamily="sans-serif"
+                            android:textColor="@color/colorBlack"/>
+                        <TextView
+                            android:id="@+id/txtName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Number Of Team Here"
+                            android:textSize="15dp"
+                            android:fontFamily="sans-serif"
+                            android:textColor="@color/colorBlack"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp">
+                        <TextView
+                            android:id="@+id/labelTeam"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Number Of Team"
+                            android:textSize="10dp"
+                            android:fontFamily="sans-serif"
+                            android:textColor="@color/colorBlack"/>
+                        <TextView
+                            android:id="@+id/txtTeam"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Number Of Team Here"
+                            android:textSize="15dp"
+                            android:fontFamily="sans-serif"
+                            android:textColor="@color/colorBlack"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp">
+                        <TextView
+                            android:id="@+id/labelType"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Elimination Type"
+                            android:textSize="10dp"
+                            android:fontFamily="sans-serif"
+                            android:textColor="@color/colorBlack"/>
+                        <TextView
+                            android:id="@+id/txtType"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="KNOCKOUT"
+                            android:textSize="15dp"
+                            android:fontFamily="sans-serif"
+                            android:textColor="@color/colorBlack"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp">
+                        <TextView
+                            android:id="@+id/labelCreated"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Date Created"
+                            android:textSize="10dp"
+                            android:fontFamily="sans-serif"
+                            android:textColor="@color/colorBlack"/>
+                        <TextView
+                            android:id="@+id/txtCreated"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Number Of Team Here"
+                            android:textSize="15dp"
+                            android:fontFamily="sans-serif"
+                            android:textColor="@color/colorBlack"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp">
+                        <TextView
+                            android:id="@+id/labelModified"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Last Updated"
+                            android:textSize="10dp"
+                            android:fontFamily="sans-serif"
+                            android:textColor="@color/colorBlack"/>
+                        <TextView
+                            android:id="@+id/txtModified"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Number Of Team Here"
+                            android:textSize="15dp"
+                            android:fontFamily="sans-serif"
+                            android:textColor="@color/colorBlack"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp">
+                        <TextView
+                            android:id="@+id/labelStatus"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Event Status"
+                            android:textSize="10dp"
+                            android:fontFamily="sans-serif"
+                            android:textColor="@color/colorBlack"/>
+                        <TextView
+                            android:id="@+id/txtStatus"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Number Of Team Here"
+                            android:textSize="15dp"
+                            android:fontFamily="sans-serif"
+                            android:textColor="@color/colorBlack"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
             <ScrollView
                 android:id="@+id/scroll_view"
                 android:layout_width="match_parent"
@@ -76,17 +231,6 @@
 
             </ScrollView>
         </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
-    </ScrollView>
-
-
-
-
-    <RelativeLayout
-        android:id="@+id/gf_container"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </RelativeLayout>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

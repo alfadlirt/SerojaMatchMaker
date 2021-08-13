@@ -49,20 +49,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.AdapterHolder> impleme
         holder.name.setText(name);
         holder.team.setText(Integer.toString(team) + " Teams    -   Knockout");
         holder.status.setText(status);
+        holder.id=event.getId();
 
-        holder.select.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, DetailEvent.class);
-                intent.putExtra("data", event);
-                intent.putExtra("event_name", event.getEventName().toString());
-                intent.putExtra("number_of_team", Integer.toString(event.getNumberOfTeam()));
-                intent.putExtra("status", event.getStatus().toString());
-                intent.putExtra("last_modified", event.getLastModified());
-                mContext.startActivity(intent);
-                Log.e("Adapter","Berhasil Masuk DeEtail Event");
-            }
-        });
 
     }
 
@@ -113,7 +101,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.AdapterHolder> impleme
 
     public class AdapterHolder extends RecyclerView.ViewHolder {
         TextView name, team, status;
-
+        String id;
         LinearLayout select;
 
         public AdapterHolder(@NonNull View itemView) {
@@ -123,6 +111,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.AdapterHolder> impleme
             team = itemView.findViewById(R.id.eventTeam);
             status = itemView.findViewById(R.id.eventStatus);
             select = itemView.findViewById(R.id.selectEvent);
+
+            select.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, DetailEvent.class);
+                    intent.putExtra("id_event", id);
+                    mContext.startActivity(intent);
+                    Log.e("Adapter","Berhasil Masuk DeEtail Event");
+                }
+            });
         }
     }
 }
