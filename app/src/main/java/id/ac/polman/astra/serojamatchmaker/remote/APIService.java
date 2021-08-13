@@ -1,8 +1,16 @@
 package id.ac.polman.astra.serojamatchmaker.remote;
 
+<<<<<<< HEAD
 import java.util.List;
 
 import id.ac.polman.astra.serojamatchmaker.entity.Event;
+=======
+import id.ac.polman.astra.serojamatchmaker.entity.BracketResponse;
+import id.ac.polman.astra.serojamatchmaker.entity.EventInput;
+import id.ac.polman.astra.serojamatchmaker.entity.ResponseAddEvent;
+import id.ac.polman.astra.serojamatchmaker.entity.ResponseBracketGet;
+import id.ac.polman.astra.serojamatchmaker.entity.ResponseBracketPut;
+>>>>>>> merging-splash-event
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseChangePassword;
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseEditUser;
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseGetEvent;
@@ -17,7 +25,8 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
-public interface APIService {
+public interface
+APIService {
 
     @POST("user/auth")
     @FormUrlEncoded
@@ -27,6 +36,7 @@ public interface APIService {
 
     @POST("user")
     Call<User> addUser(@Body User user);
+
 
     @GET("user/")
     Call<User> getUser();
@@ -47,6 +57,7 @@ public interface APIService {
                                                 @Field("oldpassword") String oldpassword,
                                                 @Field("newpassword") String newpassword);
 
+<<<<<<< HEAD
     @GET("event")
     Call<ResponseGetEvent> getEvent();
 
@@ -55,4 +66,17 @@ public interface APIService {
 
     @GET("getEventCount/finished")
     Call<Integer> getCountEventfinished();
+=======
+    @POST("event")
+    Call<ResponseAddEvent> addEventAndTeam(@Body EventInput eventInput);
+
+    @GET("match/{id}")
+    Call<ResponseBracketGet> getEventBracket(@Path("id") String id);
+
+    @PUT("match/inputscore/{id}")
+    @FormUrlEncoded
+    Call<ResponseBracketPut> updatescore(@Path("id") String id,
+                                         @Field("skor_a") Integer skor_a,
+                                         @Field("skor_b") Integer skor_b);
+>>>>>>> merging-splash-event
 }

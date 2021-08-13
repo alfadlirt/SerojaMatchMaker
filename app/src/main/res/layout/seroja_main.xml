@@ -134,7 +134,7 @@
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:id="@+id/eventbtn">
+                android:id="@+id/eventBtn">
 
                 <ImageView
                     android:layout_width="40dp"

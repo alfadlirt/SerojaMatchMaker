@@ -71,4 +71,6 @@ public class EventInput {
     public void setTeam_list_json(String team_list_json) {
         this.team_list_json = team_list_json;
     }
+
 }
+

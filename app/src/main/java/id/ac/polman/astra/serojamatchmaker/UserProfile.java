@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -110,7 +109,6 @@ public class UserProfile extends Fragment {
                         ((MainActivity) getActivity()).onStartDashboard();
                         return true;
                     case R.id.event:
-                        ((MainActivity) getActivity()).callFragmentAddEvent();
                         return true;
                     case R.id.logout:
                         startActivity(new Intent(getActivity(), StartActivity.class));

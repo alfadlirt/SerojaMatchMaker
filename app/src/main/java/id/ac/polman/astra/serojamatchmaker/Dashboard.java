@@ -4,15 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -28,8 +25,6 @@ import id.ac.polman.astra.serojamatchmaker.entity.User;
 import id.ac.polman.astra.serojamatchmaker.remote.APIService;
 import id.ac.polman.astra.serojamatchmaker.utils.APIUtils;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static android.content.ContentValues.TAG;
 
@@ -93,6 +88,14 @@ public class Dashboard extends Fragment{
             }
         });
 
+        LinearLayout event = (LinearLayout) view.findViewById(R.id.eventBtn);
+        event.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).callFragmentEvent();
+            }
+        });
+
         LinearLayout getProfile = (LinearLayout) view.findViewById(R.id.userbtn);
         getProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,14 +103,17 @@ public class Dashboard extends Fragment{
                 ((MainActivity) getActivity()).callFragmentProfil();
             }
         });
-
-        LinearLayout getEvent = (LinearLayout) view.findViewById(R.id.eventbtn);
-        getEvent.setOnClickListener(new View.OnClickListener() {
+/*
+        LinearLayout logoutButton = (LinearLayout) view.findViewById(R.id.logoutbtn);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).callFragmentEvent();
+                //((MainActivity) getActivity()).callFragmentEvent();
+                //((MainActivity) getActivity()).callDetailFragment();
             }
         });
+        */
+
 
         SharedPreferences preferences = this.getActivity().getSharedPreferences(APP_NAME, Context.MODE_PRIVATE);
         LinearLayout logout = (LinearLayout) view.findViewById(R.id.logoutbtn);

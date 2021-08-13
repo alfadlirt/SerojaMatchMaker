@@ -18,10 +18,10 @@ public class BracketResponse {
     private String teamB;
     @SerializedName("skor_a")
     @Expose
-    private Object skorA;
+    private Integer skorA;
     @SerializedName("skor_b")
     @Expose
-    private Object skorB;
+    private Integer skorB;
     @SerializedName("winner")
     @Expose
     private Object winner;
@@ -34,6 +34,9 @@ public class BracketResponse {
     @SerializedName("is_wo")
     @Expose
     private Integer isWo;
+    @SerializedName("is_wo_moved")
+    @Expose
+    private Integer isWoMoved;
     @SerializedName("is_addition")
     @Expose
     private Integer isAddition;
@@ -55,6 +58,14 @@ public class BracketResponse {
     @SerializedName("status")
     @Expose
     private String status;
+
+    public Integer getIsWoMoved() {
+        return isWoMoved;
+    }
+
+    public void setIsWoMoved(Integer isWoMoved) {
+        this.isWoMoved = isWoMoved;
+    }
 
     public String getId() {
         return id;
@@ -88,19 +99,19 @@ public class BracketResponse {
         this.teamB = teamB;
     }
 
-    public Object getSkorA() {
+    public Integer getSkorA() {
         return skorA;
     }
 
-    public void setSkorA(Object skorA) {
+    public void setSkorA(Integer skorA) {
         this.skorA = skorA;
     }
 
-    public Object getSkorB() {
+    public Integer getSkorB() {
         return skorB;
     }
 
-    public void setSkorB(Object skorB) {
+    public void setSkorB(Integer skorB) {
         this.skorB = skorB;
     }
 

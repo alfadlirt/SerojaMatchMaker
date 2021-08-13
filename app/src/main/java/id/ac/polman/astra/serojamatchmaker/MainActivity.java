@@ -3,28 +3,27 @@ package id.ac.polman.astra.serojamatchmaker;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.EventLog;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements Dashboard.Callbacks{
+import id.ac.polman.astra.serojamatchmaker.fragment.BracketsFragment;
+import id.ac.polman.astra.serojamatchmaker.model.BracketCard;
+import id.ac.polman.astra.serojamatchmaker.utils.UpdateScoreModal;
+
+public class MainActivity extends AppCompatActivity implements Dashboard.Callbacks, UpdateScoreModal.OnInputScore {
 
     SharedPreferences sharedPreferences;
     private final static String APP_NAME = "serojamatchmaker";
     private final static String UNAME = "username";
     private final static String NAMA = "name";
     private final static String ID = "id";
-
+    InputScoreFragment inptScoreFrg;
     private LinearLayout start;
+    private BracketsFragment bracketFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +47,50 @@ public class MainActivity extends AppCompatActivity implements Dashboard.Callbac
                 .commit();
     }
 
+    public void callFragmentEvent() {
+        EventFragment fragment2 = new EventFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mainActivity, fragment2)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void callFragmentTeam(Bundle bundle) {
+        TeamFragment fragment2 = new TeamFragment();
+        fragment2.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mainActivity, fragment2)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void callFragmentEventCreated(Bundle bundle) {
+        EventCreatedFragment fragment2 = new EventCreatedFragment();
+        fragment2.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mainActivity, fragment2)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void callDetailFragment() {
+        BracketsFragment fragment2 = new BracketsFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mainActivity, fragment2)
+                .addToBackStack(null)
+                .commit();
+        //initialiseBracketsFragment();
+    }
+    private void initialiseBracketsFragment() {
+
+        bracketFragment = new BracketsFragment();
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.container, bracketFragment, "brackets_home_fragment");
+        transaction.commit();
+        manager.executePendingTransactions();
+    }
+
     @Override
     public void onStartDashboard() {
         Fragment fragment = Dashboard.newInstance();
@@ -58,14 +101,20 @@ public class MainActivity extends AppCompatActivity implements Dashboard.Callbac
     }
 
     public void callFragmentProfil(){
-        Fragment fragment = UserProfile.newInstance();
+        /*Fragment fragment = UserProfile.newInstance();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.mainActivity, fragment)
+                .addToBackStack(null)
+                .commit();*/
+        inptScoreFrg = new InputScoreFragment();
+        //fragment2.setTargetFragment(,1);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mainActivity, inptScoreFrg)
                 .addToBackStack(null)
                 .commit();
     }
 
-    public void callFragmentEvent(){
+    public void callFragmentEventList(){
         Fragment fragment = EventUserFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.mainActivity, fragment)
@@ -81,12 +130,18 @@ public class MainActivity extends AppCompatActivity implements Dashboard.Callbac
                 .commit();
     }
 
-    public void callFragmentAddEvent(){
-        Fragment fragment = EventActivity.newInstance();
+    public void refreshInputScore(){
+        inptScoreFrg = new InputScoreFragment();
+        //fragment2.setTargetFragment(,1);
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.mainActivity, fragment)
+                .replace(R.id.mainActivity, inptScoreFrg)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    @Override
+    public void sendInput(BracketCard brckt) {
+        inptScoreFrg.InputScore(brckt);
     }
 
 }
