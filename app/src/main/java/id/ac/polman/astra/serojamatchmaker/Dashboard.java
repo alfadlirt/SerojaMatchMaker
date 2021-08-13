@@ -92,7 +92,7 @@ public class Dashboard extends Fragment{
         event.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).callFragmentEvent();
+                ((MainActivity) getActivity()).callFragmentEventList();
             }
         });
 
