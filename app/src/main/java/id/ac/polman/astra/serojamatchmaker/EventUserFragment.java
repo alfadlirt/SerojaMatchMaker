@@ -72,7 +72,7 @@ public class EventUserFragment extends Fragment {
         mBtnEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).callFragmentEventList();
+                ((MainActivity) getActivity()).callFragmentEvent();
             }
         });
 
@@ -89,15 +89,7 @@ public class EventUserFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
 
-                if (newText!= null )
-                {
-                    if (newText.isEmpty()){
-                        search();
-                    }
-                    else{
-                        mAdapter.getFilter().filter(newText);
-                    }
-                }
+                //search();
                 return true;
             }
         });
@@ -145,7 +137,6 @@ public class EventUserFragment extends Fragment {
                 if (response.isSuccessful()) {
                     /*for(int i = 0; i<response.body().getData().size(); i++){
                         String libId = response.body().getData().get(i).getUserId();
-                        libId = "USR0000005";
                         if(idsp == libId){
                             List<Event> posts = response.body().getData();
                             mAdapter = new Adapter2(getActivity(), posts);

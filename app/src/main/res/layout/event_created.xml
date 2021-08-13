@@ -1,47 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorWhite"
     android:id="@+id/event_created">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/txtEC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="120dp">
+        android:fontFamily="sans-serif"
+        android:text="Event Created"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.071" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Event Created"
-            android:textStyle="bold"
-            android:textSize="25dp"
-            android:fontFamily="sans-serif"
-            android:textColor="@color/colorBlack"/>
-    </LinearLayout>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="399dp"
-        android:layout_height="480dp"
-        app:cardCornerRadius="30dp"
-        app:cardElevation="10dp"
-        app:cardUseCompatPadding="true"
-        android:layout_marginTop="140dp"
-        app:cardBackgroundColor="@color/colorGreen">
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
-    android:orientation="vertical">
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutEventCreatedName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:helperText="Event ID"
-        android:layout_margin="10dp">
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtEC">
+
         <TextView
             android:id="@+id/txt_EventID"
             android:layout_width="match_parent"
@@ -51,11 +44,19 @@
             android:fontFamily="sans-serif"
             android:textColor="@color/colorBlack"/>
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutcrName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:helperText="Event Name"
-        android:layout_margin="10dp">
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutEventCreatedName">
         <TextView
             android:id="@+id/txt_EventName"
             android:layout_width="match_parent"
@@ -65,11 +66,19 @@
             android:fontFamily="sans-serif"
             android:textColor="@color/colorBlack"/>
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/lynof"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:helperText="Number Of Team"
-        android:layout_margin="10dp">
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutcrName">
         <TextView
             android:id="@+id/txt_NumberOfTeam"
             android:layout_width="match_parent"
@@ -79,32 +88,32 @@
             android:fontFamily="sans-serif"
             android:textColor="@color/colorBlack"/>
     </com.google.android.material.textfield.TextInputLayout>
-</LinearLayout>
-
 
 
         <LinearLayout
             android:id="@+id/btnBack"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="200dp"
-            android:layout_marginTop="350dp"
-            android:background="@drawable/bg_btn_white">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_button_green"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias=".0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lynof">
 
             <TextView
                 android:id="@+id/btnSaveText"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
                 android:text="Next"
                 android:textAlignment="center"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorWhite"
                 android:textSize="16dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
         </LinearLayout>
 
 
-    </androidx.cardview.widget.CardView>
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -51,7 +51,7 @@ public class Adapter2 extends RecyclerView.Adapter<Adapter2.AdapterHolder> imple
         holder.select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, EventUserFragment.class);
+                Intent intent = new Intent(mContext, DetailEvent.class);
                 intent.putExtra("data", event);
                 intent.putExtra("event_name", event.getEventName().toString());
                 intent.putExtra("number_of_team", Integer.toString(event.getNumberOfTeam()));

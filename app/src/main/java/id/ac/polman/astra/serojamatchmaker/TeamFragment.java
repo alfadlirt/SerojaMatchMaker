@@ -140,7 +140,7 @@ public class TeamFragment extends Fragment {
                                 }
                                 mAPIService = APIUtils.getAPIService();
                                 Call<ResponseAddEvent> call = mAPIService.addEventAndTeam(
-                                        new EventInput("ASD",event.getEvent_name(),event.getNumber_of_team(),event.getElimination_type(),team_list_json));
+                                        new EventInput("USR0000005",event.getEvent_name(),event.getNumber_of_team(),event.getElimination_type(),team_list_json));
 
                                 call.enqueue(new Callback<ResponseAddEvent>() {
                                     @Override

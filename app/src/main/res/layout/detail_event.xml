@@ -5,7 +5,7 @@ xmlns:tools="http://schemas.android.com/tools"
 tools:context=".DetailEvent"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:background="@drawable/bg_main"
+android:background="@color/colorWhite"
 android:orientation="vertical"
     android:id="@+id/container_detail">
 
