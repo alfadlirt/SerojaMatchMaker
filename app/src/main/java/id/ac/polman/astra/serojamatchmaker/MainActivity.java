@@ -65,6 +65,14 @@ public class MainActivity extends AppCompatActivity implements Dashboard.Callbac
                 .commit();
     }
 
+    public void callFragmentEvent(){
+        Fragment fragment = EventUserFragment.newInstance();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mainActivity, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
     public void callFragmentChangePassword(){
         Fragment fragment = UserPassword.newInstance();
         getSupportFragmentManager().beginTransaction()

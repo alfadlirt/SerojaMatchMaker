@@ -51,16 +51,23 @@ public class monitoringActivity extends AppCompatActivity {
         mSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                mAdapter.getFilter().filter(query);
-                return false;
+                //mAdapter.getFilter().filter(query);
+                return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                mAdapter.getFilter().filter(newText);
 
-                //filter(newText);
-                return false;
+                if (newText!= null )
+                {
+                    if (newText.isEmpty()){
+                        search();
+                    }
+                    else{
+                        mAdapter.getFilter().filter(newText);
+                    }
+                }
+                return true;
             }
         });
 
@@ -94,8 +101,6 @@ public class monitoringActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         search();
-
-        //onCreateOptionsMenu(null);
 
     }
 
