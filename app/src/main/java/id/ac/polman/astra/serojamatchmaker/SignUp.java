@@ -3,11 +3,15 @@ package id.ac.polman.astra.serojamatchmaker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 import id.ac.polman.astra.serojamatchmaker.entity.ResponseLogin;
 import id.ac.polman.astra.serojamatchmaker.entity.User;
@@ -21,10 +25,13 @@ import static android.content.ContentValues.TAG;
 
 public class SignUp extends AppCompatActivity {
     private APIService mAPIService;
-    private EditText mName;
-    private EditText mUsername;
-    private EditText mPassword;
-    private EditText mPassword2;
+    private TextInputEditText mName;
+    private TextInputEditText mUsername;
+    private TextInputEditText mPassword;
+    private TextInputEditText mPassword2;
+
+    TextView mTextViewLogin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,12 +42,25 @@ public class SignUp extends AppCompatActivity {
         mPassword = findViewById(R.id.txtPassword);
         mPassword2 = findViewById(R.id.txtRePassword);
         mAPIService = APIUtils.getAPIService();
+        mTextViewLogin = findViewById(R.id.txtLoginAcc);
+
         findViewById(R.id.btnCreateUser).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createUser();
             }
         });
+
+        mTextViewLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+
+                startActivity(intent);
+                finish();
+            }
+        });
+        mAPIService = APIUtils.getAPIService();
 
 
     }

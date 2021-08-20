@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".monitoringActivity"
+    android:id="@+id/monitoring_activity">
+
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/txtSearchEvent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/eventDataList"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:clipToPadding="false"
+        android:scrollbars="none"
+        tools:listitem="@layout/event_list" />
+
+    <LinearLayout
+        android:id="@+id/btnBackStart"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/eventDataList"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="41dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_button_green">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_baseline_arrow_back_24" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
