@@ -115,11 +115,16 @@ public class InputScoreFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
 
-
+        view.findViewById(R.id.btnBack).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).onStartDashboard();
+            }
+        });
 
         mAPIService = APIUtils.getAPIService();
         Call<ResponseBracketGet> call = mAPIService.getEventBracket(id_event);
-
+        loadingDialog.startLoading("Loading Data...");
         call.enqueue(new Callback<ResponseBracketGet>() {
             @Override
             public void onResponse(Call<ResponseBracketGet> call, Response<ResponseBracketGet> response) {
@@ -185,6 +190,7 @@ public class InputScoreFragment extends Fragment {
                         mAdapter = new BracketListAdapter(getContext(), list);
                         mRecyclerView.setLayoutManager(mLayoutManager);
                         mRecyclerView.setAdapter(mAdapter);
+                        loadingDialog.stopLoading();
                     }else{
 
                     }

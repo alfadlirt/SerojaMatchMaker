@@ -24,7 +24,7 @@
         android:layout_height="50dp"
         android:layout_marginLeft="200dp"
         android:layout_marginTop="500dp"
-        android:background="@drawable/bg_button_green">
+        android:background="@drawable/cut_card_background">
 
         <TextView
             android:layout_width="60dp"
@@ -33,7 +33,7 @@
             android:layout_marginTop="5dp"
             android:text="Save"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="@color/colorBlack"
             android:textSize="16dp"
             android:textStyle="bold" />
     </LinearLayout>

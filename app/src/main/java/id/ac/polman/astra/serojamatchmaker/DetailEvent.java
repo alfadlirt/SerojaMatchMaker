@@ -32,31 +32,17 @@ public class DetailEvent extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_event);
-
-/*
-        String name = getIntent().getStringExtra("event_name");
-        mName.setText(name);
-
-        String team = getIntent().getStringExtra("number_of_team");
-        mNOT.setText(team);
-
-        String status = ;
-        mStatus.setText(status);
-
-        String modif = ;
-        mLastM.setText(modif);
-*/
-
+        loadingDialog = new CustomLoading(this);
         Bundle bundle = new Bundle();
         bundle.putString("id_event",getIntent().getStringExtra("id_event"));
-        //loadingDialog.startLoading("Updating Score");
+        loadingDialog.startLoading("Updating Score");
         BracketsFragment fragment2 = new BracketsFragment();
         fragment2.setArguments(bundle);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container_detail, fragment2)
                 .addToBackStack(null)
                 .commit();
-        //loadingDialog.stopLoading();
+        loadingDialog.stopLoading();
     }
 
 

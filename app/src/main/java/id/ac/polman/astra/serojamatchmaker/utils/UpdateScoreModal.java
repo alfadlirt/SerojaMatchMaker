@@ -56,7 +56,7 @@ public class UpdateScoreModal extends DialogFragment {
 
 
         builder.setView(view)
-                .setTitle("Login")
+                .setTitle("Input Score")
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

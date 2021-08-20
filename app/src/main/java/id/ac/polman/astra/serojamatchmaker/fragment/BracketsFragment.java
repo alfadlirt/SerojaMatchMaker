@@ -143,7 +143,27 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
                 if(response.isSuccessful()){
                     if(response.body().getSuccess()==true) {
                         int current = response.body().getData().get(0).getStageNumber();
-                        int bracketBound = response.body().getData().get(0).getStageNumber()*2;
+                        int bracketBound = 0;
+                        if(response.body().getData().size()==4||
+                                response.body().getData().size()==8||
+                                response.body().getData().size()==16||
+                                response.body().getData().size()==32){
+                            bracketBound = response.body().getData().size()/2;
+                        }
+                        else{
+                            int number = response.body().getData().size();
+                            int[] candidates = {32,16,8,4,2};
+                            int last = 0;
+                            for (int cand : candidates){
+                                if (cand > number) {
+                                    last = cand;
+                                } else if (cand == number) {
+                                    bracketBound = number/2;
+                                }
+                            }
+                            bracketBound = last/2;
+                        }
+
                         int counterStage = 0;
 
                         List<BracketArrayed> bracketArrayed = new ArrayList<>();
